@@ -1,0 +1,37 @@
+{
+  "name": "clazzi-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "May chu MCP cho CLAZZI",
+  "type": "module",
+  "bin": {
+    "clazzi-mcp": "dist/server.js"
+  },
+  "main": "dist/server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node dist/server.js",
+    "quet": "tsx scripts/quet-api.ts",
+    "test": "jest",
+    "lint": "eslint .",
+    "kiem": "tsc --noEmit && jest && eslint ."
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.13.0",
+    "eslint": "^9.20.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0"
+  }
+}
