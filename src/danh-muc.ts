@@ -10,7 +10,22 @@ import { LoiNguoiDung } from './loi.js';
  * của bản dựng, nên nhập tĩnh thì `tsc` không cho. Đọc lúc chạy cũng có cái lợi là sửa danh mục
  * xong chỉ cần khởi động lại máy chủ, không phải dựng lại.
  */
-const DUONG_DAN = fileURLToPath(new URL('../danh-muc.json', import.meta.url));
+/**
+ * Danh mục dùng cho bản đang trỏ tới.
+ *
+ * Mặc định `danh-muc.json` (mã nguồn `clazzi-api`). Khai `CLAZZI_DANH_MUC` để dùng danh mục của
+ * bản KHÁC — ví dụ `danh-muc.gecko.json` sinh từ kho `otm-system/server-api`.
+ *
+ * Vì sao phải tách theo bản chứ không dùng chung một danh mục: các bản là NHÁNH ĐÃ TRÔI XA nhau.
+ * Đo 16/09/2026: clazzi 511 tuyến / 70 nhóm, gecko 434 / 59 — gecko thiếu hẳn 11 nhóm
+ * (`/zoom`, `/student-documents`, `/site`, `/api-keys`…). Dùng danh mục của clazzi cho gecko là
+ * hứa hàng chục tuyến máy chủ đó không có, và mô hình gọi vào nhận 404 rồi tưởng hệ thống hỏng.
+ *
+ * Danh sách công cụ sinh TỪ danh mục, nên đổi danh mục là bảng công cụ tự co lại đúng bằng
+ * những gì bản đó thật sự có.
+ */
+const TEN_DANH_MUC = (process.env.CLAZZI_DANH_MUC ?? 'danh-muc.json').trim();
+const DUONG_DAN = fileURLToPath(new URL(`../${TEN_DANH_MUC}`, import.meta.url));
 
 let daNap: DanhMuc | null = null;
 

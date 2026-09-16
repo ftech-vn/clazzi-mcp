@@ -74,7 +74,18 @@ export function dinhNghiaCongCu(): DinhNghiaCongCu[] {
   const ra: DinhNghiaCongCu[] = [];
 
   for (const m of MANG) {
-    const nhom = m.nhom.map(nhomBatBuoc);
+    /**
+     * Chỉ giữ nhóm THẬT SỰ có trong danh mục của bản đang trỏ tới.
+     *
+     * Các bản là nhánh đã trôi xa nhau: gecko (434 tuyến / 59 nhóm) thiếu hẳn 11 nhóm so với
+     * clazzi (511 / 70). Trước đây chỗ này gọi `nhomBatBuoc` nên gặp nhóm thiếu là NÉM LỖI và
+     * máy chủ MCP không khai nổi công cụ nào — bảng công cụ trống trơn, không ai hiểu vì sao.
+     *
+     * Mảng rỗng hoàn toàn thì BỎ HẲN công cụ đó. Khai một công cụ không thao tác được gì là mời
+     * mô hình gọi vào rồi nhận lỗi — tệ hơn là không khai.
+     */
+    const nhom = m.nhom.map(timNhom).filter((n): n is Nhom => n !== undefined);
+    if (nhom.length === 0) continue;
     const soTuyen = nhom.reduce((s, n) => s + moiTuyenCuaNhom(n).length, 0);
     ra.push({
       name: m.ten,

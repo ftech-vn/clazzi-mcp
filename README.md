@@ -174,3 +174,42 @@ Cây tệp:
 | `src/ban.ts` | Nhận diện bản triển khai |
 | `src/the.ts` | Lớp mỏng lấy khoá — chỗ duy nhất biết khoá từ đâu ra |
 | `danh-muc.json` | Ảnh chụp 511 tuyến, commit vào kho |
+
+## Trỏ vào bản khác (gecko, knb, peptalk…)
+
+Các bản là **nhánh đã trôi xa nhau**, không phải cùng một bề mặt API. Đo 16/09/2026:
+
+| Bản | Kho mã | Tuyến / Nhóm | Số công cụ MCP |
+|---|---|---|---|
+| clazzi | `clazzi-api` | 511 / 70 | 27 |
+| gecko | `otm-api` (`otm/main`) | 434 / 59 | **23** |
+
+Gecko là **tập con nghiêm ngặt** của clazzi — không có nhóm nào clazzi thiếu, nhưng thiếu 11 nhóm
+(`/zoom`, `/student-documents`, `/document-types`, `/document-reminders`, `/site`, `/orders`,
+`/catalog`, `/dashboard`, `/setup`, `/trial`, `/api-keys`).
+
+Vì công cụ **sinh từ danh mục**, đổi danh mục là bảng công cụ tự co lại: bốn công cụ
+`clazzi_lop_online`, `clazzi_ho_so_du_hoc`, `clazzi_bao_cao`, `clazzi_admin_tong` biến mất hẳn ở
+gecko. Khai một công cụ không thao tác được gì là mời mô hình gọi vào rồi nhận lỗi — tệ hơn là
+không khai.
+
+Sinh danh mục cho một bản:
+
+```bash
+npx tsx scripts/quet-api.ts /duong/dan/toi/ma-nguon      # ghi ra danh-muc.json
+mv danh-muc.json danh-muc.<ten-ban>.json
+npx tsx scripts/quet-api.ts ../clazzi-api                # dung lai danh muc goc
+```
+
+Rồi trỏ tới nó bằng `CLAZZI_DANH_MUC`:
+
+```jsonc
+"env": {
+  "CLAZZI_API_URL":  "https://<may-chu-cua-ban-do>",
+  "CLAZZI_API_KEY":  "clz_...",
+  "CLAZZI_DANH_MUC": "danh-muc.gecko.json"
+}
+```
+
+⚠ Danh mục và địa chỉ **phải khớp nhau**. Trỏ địa chỉ gecko mà dùng danh mục clazzi là hứa hàng
+chục tuyến máy chủ đó không có, và mô hình sẽ đọc 404 thành "hệ thống hỏng".

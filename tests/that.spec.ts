@@ -42,19 +42,33 @@ describe('tuyến công khai gọi được thật — chứng minh đường HT
     expect(text).toContain('version');
   });
 
-  neuCoMang('GET /health, /setup/status, /trial/status đều trả JSON', async () => {
+  /**
+   * Khoá SAI khuôn `clz_…` bị máy chủ từ chối NGAY Ở RÌA, kể cả với tuyến công khai.
+   *
+   * Hai test này trước đây mong `loi === false`: hồi đó middleware đổi khoá chưa triển khai, nên
+   * chuỗi `clz_…` chỉ là một vé JWT hỏng bị bỏ qua và `/health` vẫn trả 200. Từ 15/09/2026
+   * middleware đã lên, và nó NHẬN RA đó là khoá rồi từ chối — hành vi đúng hơn: trình một chìa
+   * sai thì phải bị báo sai, không nên lờ đi rồi cho qua như không có gì.
+   *
+   * Điều còn phải giữ: thông điệp phải nói rõ là KHOÁ hỏng, để người dùng đi cấp lại khoá chứ
+   * không đi dò mạng hay đổi mật khẩu.
+   */
+  neuCoMang('khoá sai bị từ chối kể cả ở tuyến công khai, và nói rõ là do khoá', async () => {
     for (const d of ['/health', '/setup/status', '/trial/status']) {
       process.env.CLAZZI_API_KEY = 'clz_khonghople_khonghoplekhonghoplekhonghople';
       const { text, loi } = await chayCongCu('clazzi_goi', { method: 'GET', duongDan: d });
-      expect(loi).toBe(false);
+      expect(loi).toBe(true);
       expect(text).toContain('DÙNG THỬ — demo');
+      expect(text.toLowerCase()).toContain('khoá');
     }
   });
 
-  neuCoMang('ba tuyến công khai đó đều có trong danh mục', async () => {
+  neuCoMang('bốn tuyến công khai đó đều có trong danh mục', async () => {
+    // Chỉ kiểm DANH MỤC có tuyến hay không, không kiểm gọi được hay không: gọi được còn phụ
+    // thuộc khoá, mà khoá thì không phải việc của danh mục.
     for (const d of ['/health', '/version', '/setup/status', '/trial/status']) {
-      const { loi } = await chayCongCu('clazzi_goi', { method: 'GET', duongDan: d });
-      expect(loi).toBe(false);
+      const { text } = await chayCongCu('clazzi_mo_ta', { doiTuong: d.split('/').slice(0, 2).join('/') });
+      expect(text).toContain(d.split('/')[1]!);
     }
   });
 });
