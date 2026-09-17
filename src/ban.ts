@@ -21,6 +21,10 @@ const DA_BIET: Record<string, { ten: string; laHeThat: boolean }> = {
   'api.clazzi.vn': { ten: 'HỆ THẬT — CLAZZI (khách trả tiền)', laHeThat: true },
   'api-demo.clazzi.vn': { ten: 'DÙNG THỬ — demo', laHeThat: false },
   'api.tiengtrungbackinh.com': { ten: 'HỆ THẬT — Tiếng Trung Bắc Kinh (khách trả tiền)', laHeThat: true },
+  'api-sunshine.clazzi.vn': { ten: 'HỆ THẬT — Sunshine (khách trả tiền)', laHeThat: true },
+  // Bản của gecko. Danh mục riêng: đặt CLAZZI_DANH_MUC=danh-muc.gecko.json, không thì MCP sẽ hứa
+  // hàng chục tuyến máy chủ này không có.
+  'otm-api.f-tech.vn': { ten: 'HỆ THẬT — gecko / OTM (khách trả tiền)', laHeThat: true },
 };
 
 export function nhanDienBan(diaChiTho?: string): Ban {
