@@ -45,9 +45,12 @@ codex mcp add clazzi --url https://api-demo.clazzi.vn/mcp \
 ```
 
 Đổi `api-demo.clazzi.vn` thành tên miền của bản mình. Hai lệnh trên cũng được **chính máy chủ trả
-về sẵn**, đã ghép đúng tên miền — xem `GET /api-keys/cach-cam` và phản hồi của `POST /api-keys`.
-Giao diện Cài đặt chỉ việc hiện ra cho khách sao chép; đừng để phía giao diện tự ghép chuỗi, mỗi
-khách một tên miền và ghép sai là cắm vào **nhầm bản**.
+về sẵn** ở trường `huongDanCam`, đã ghép đúng tên miền — xem phản hồi của `POST /api-keys` và
+`GET /api-keys/huong-dan-cam`. Giao diện Cài đặt chỉ việc hiện ra cho khách sao chép; đừng để
+phía giao diện tự ghép chuỗi, mỗi khách một tên miền và ghép sai là cắm vào **nhầm bản**.
+
+Lệnh Codex là **hai dòng** và phải chạy cả hai: Codex chỉ đọc khoá qua biến môi trường, nhét khoá
+thẳng vào `codex mcp add` thì lệnh chạy trót lọt nhưng trợ lý không có thẻ.
 
 Kiểm tra: `claude mcp list` / `codex mcp list`, rồi gọi `clazzi_trang_thai` — nó nói ngay đang
 trỏ bản nào và khoá thuộc tài khoản nào.
@@ -213,7 +216,8 @@ Toàn bộ 27 công cụ, danh mục, bản đồ mảng→nhóm, bộ gọi HTT
 | `loi/phien.ts` | Một phiên = bản nào + khoá nào. Chỗ duy nhất biết khoá từ đâu ra |
 | `quet/quet-nguon.ts` | Bộ quét mã nguồn ra danh mục |
 | `tuyen.ts` + `may-chu.ts` | Tuyến `/mcp` Streamable HTTP |
-| `cach-cam.ts` | Ghép hai lệnh cắm với tên miền của chính bản đó |
+| `huong-dan-cam.ts` | Ghép hai lệnh cắm với tên miền của chính bản đó (`huongDanCam`, dùng chung với gecko) |
+| `nen-tang.ts` | Trả lại global `crypto` cho Node 18 — thiếu nó thì tuyến `/mcp` chết ở lượt gọi đầu |
 
 **Vì sao lõi ở bên đó chứ không ở đây:** danh mục phải sống cùng kho với các controller nó mô tả.
 Hôm chuyển về (21/09/2026) chuyện này lộ ra ngay: module báo cáo (`/reports`, 7 tuyến) đã lên
