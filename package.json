@@ -1,20 +1,15 @@
 {
   "name": "clazzi-mcp",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "May chu MCP cho CLAZZI",
-  "type": "module",
-  "bin": {
-    "clazzi-mcp": "dist/server.js"
-  },
-  "main": "dist/server.js",
+  "description": "May chu MCP cho CLAZZI — duong stdio, danh cho nguoi trong doi",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
-    "start": "node dist/server.js",
-    "quet": "tsx scripts/quet-api.ts",
+    "start": "tsx src/server.ts",
+    "quet-ban-khac": "tsx scripts/quet-ban-khac.ts",
+    "liet-ke": "tsx scripts/liet-ke-cong-cu.ts",
     "test": "jest",
     "lint": "eslint .",
     "kiem": "tsc --noEmit && jest && eslint ."

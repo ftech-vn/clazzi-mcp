@@ -7,7 +7,7 @@ export default tseslint.config(
   ...tseslint.configs.recommended,
   {
     languageOptions: {
-      globals: { process: 'readonly', console: 'readonly', URL: 'readonly', fetch: 'readonly', AbortController: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly' },
+      globals: { process: 'readonly', console: 'readonly', URL: 'readonly', fetch: 'readonly', AbortController: 'readonly', AbortSignal: 'readonly', setTimeout: 'readonly', clearTimeout: 'readonly', __dirname: 'readonly' },
     },
     rules: {
       /**
@@ -18,6 +18,11 @@ export default tseslint.config(
       'no-console': ['error', { allow: ['error'] }],
       '@typescript-eslint/no-explicit-any': 'off',
     },
+  },
+  {
+    // Tệp cấu hình của chính bộ công cụ chạy bằng CommonJS của Node.
+    files: ['*.config.js'],
+    languageOptions: { globals: { module: 'readonly', require: 'readonly', __dirname: 'readonly' } },
   },
   {
     files: ['tests/**/*.ts'],
