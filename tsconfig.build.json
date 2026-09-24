@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "types": ["node"]
+  },
+  "include": ["src/index.ts", "src/loi/**/*.ts", "src/quet/**/*.ts", "src/cau-hinh.ts", "src/nen-tang.ts"],
+  "exclude": ["node_modules", "src/bo-noi/**", "tests/**", "scripts/**", "**/*.spec.ts"]
+}

@@ -1,25 +1,39 @@
 {
-  "name": "clazzi-mcp",
-  "version": "0.2.0",
+  "name": "@ftech-vn/clazzi-mcp",
+  "version": "0.3.0",
   "private": true,
-  "description": "May chu MCP cho CLAZZI — duong stdio, danh cho nguoi trong doi",
+  "description": "Gói lõi MCP dùng chung cho CLAZZI/gecko/knb/peptalk + bộ nối stdio",
   "engines": {
-    "node": ">=20"
+    "node": ">=18"
   },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "start": "tsx src/server.ts",
-    "quet-ban-khac": "tsx scripts/quet-ban-khac.ts",
+    "build": "tsc -p tsconfig.build.json",
+    "prepare": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "start": "tsx src/bo-noi/server.ts",
     "liet-ke": "tsx scripts/liet-ke-cong-cu.ts",
+    "sinh:clazzi": "tsx scripts/sinh-danh-muc.ts clazzi ../clazzi-api",
+    "sinh:gecko": "tsx scripts/sinh-danh-muc.ts gecko ../../gecko/server-api",
     "test": "jest",
     "lint": "eslint .",
     "kiem": "tsc --noEmit && jest && eslint ."
   },
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.30.0",
-    "zod": "^3.25.76"
+  "peerDependencies": {
+    "@modelcontextprotocol/sdk": ">=1.10.0"
+  },
+  "peerDependenciesMeta": {
+    "@modelcontextprotocol/sdk": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
+    "@modelcontextprotocol/sdk": "^1.30.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.0",
     "eslint": "^9.20.0",

@@ -1,0 +1,3179 @@
+{
+  "quetLuc": "2026-09-24T19:11:55.079Z",
+  "soTuyen": 438,
+  "soNhom": 60,
+  "nhom": [
+    {
+      "tienTo": "/absence-request-comments",
+      "ten": "Bình luận đơn nghỉ",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /absence-request-comments/",
+        "xem": "GET /absence-request-comments/:id",
+        "tao": null,
+        "sua": "PUT /absence-request-comments/:id",
+        "xoa": "DELETE /absence-request-comments/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/absence-request-comments/create-comment/:absenceRequestId",
+          "handler": "create",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "CommentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/absence-request-comments/find-by-absence-request-id/:absenceRequestId",
+          "handler": "findByAbsenceRequestId",
+          "quyen": "",
+          "thamSoTruyVan": [
+            "page",
+            "limit"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/absence-requests",
+      "ten": "Xin nghỉ",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /absence-requests/",
+        "xem": "GET /absence-requests/:id",
+        "tao": "POST /absence-requests/",
+        "sua": null,
+        "xoa": "DELETE /absence-requests/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "PUT",
+          "path": "/absence-requests/approve/:id",
+          "handler": "approveAbsence",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "ApproveAbsenceRequestDto"
+        },
+        {
+          "method": "GET",
+          "path": "/absence-requests/find-by-user",
+          "handler": "findAllAbsentRequestUser",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/accounts",
+      "ten": "Tài khoản",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/accounts/biometric-disable",
+          "handler": "biometricDisable",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/accounts/biometric-enable",
+          "handler": "biometricEnable",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "BiometricEnableDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/api-keys",
+      "ten": "Khoá API",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /api-keys/",
+        "xem": null,
+        "tao": "POST /api-keys/",
+        "sua": null,
+        "xoa": "DELETE /api-keys/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/api-keys/huong-dan-cam",
+          "handler": "huongDan",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/app-configs",
+      "ten": "Cấu hình ứng dụng",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /app-configs/",
+        "xem": "GET /app-configs/:id",
+        "tao": "POST /app-configs/",
+        "sua": "PUT /app-configs/:id",
+        "xoa": "DELETE /app-configs/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/app-configs/key/:key",
+          "handler": "getByKey",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/attendance-sheet",
+      "ten": "Điểm danh",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /attendance-sheet/",
+        "xem": "GET /attendance-sheet/:id",
+        "tao": "POST /attendance-sheet/",
+        "sua": null,
+        "xoa": "DELETE /attendance-sheet/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/attendance-sheet/analytics",
+          "handler": "countClasses",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "classId",
+            "classSessionId"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/attendance-sheet/checkin",
+          "handler": "",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/attendance-sheet/create-or-update",
+          "handler": "createOrUpdate",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "classSessionId"
+          ],
+          "than": "CreateOrUpdateAttendanceSheetDto"
+        },
+        {
+          "method": "GET",
+          "path": "/attendance-sheet/history/:classId",
+          "handler": "attendanceHistory",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/auth",
+      "ten": "Đăng nhập / xác thực",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/auth/refresh-token",
+          "handler": "refreshToken",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "RefreshTokenDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/staff/forgot-password",
+          "handler": "forgotPassword",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "ForgotDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/staff/login",
+          "handler": "staffLogin",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "LoginDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/staff/update-password",
+          "handler": "resetPassword",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "UpdateNewPasswordDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/staffs/verify-email",
+          "handler": "verifyEmail",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "VerifyEmailDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/update-password",
+          "handler": "updatePassword",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "UpdateNewPasswordDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/user/login",
+          "handler": "login",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "UserLoginDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/user/resent-otp",
+          "handler": "resentOtp",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "UserLoginDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/user/switch-account",
+          "handler": "switchAccount",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [],
+          "than": "UserSwitchDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/user/verify-otp",
+          "handler": "userVerifyOtp",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "UserVerifyOtpDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/users/biometric",
+          "handler": "biometricLogin",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "BiometricLoginDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/verify-recovery-code",
+          "handler": "verifyRecoveryCode",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": "VerifyRecoveryDto"
+        },
+        {
+          "method": "GET",
+          "path": "/auth/verify-recovery-code/:email/:code",
+          "handler": "verifyRecoveryCodeFromUrl",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/centers",
+      "ten": "Cơ sở / trung tâm",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /centers/",
+        "xem": "GET /centers/:id",
+        "tao": "POST /centers/",
+        "sua": "PUT /centers/:id",
+        "xoa": "DELETE /centers/:id"
+      },
+      "tuyenKhac": []
+    },
+    {
+      "tienTo": "/class-lessons",
+      "ten": "Bài của lớp",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /class-lessons/",
+        "xem": "GET /class-lessons/:id",
+        "tao": "POST /class-lessons/",
+        "sua": null,
+        "xoa": "DELETE /class-lessons/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "PUT",
+          "path": "/class-lessons/:classSessionId",
+          "handler": "createOrUpdate",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateClassLessonDto"
+        },
+        {
+          "method": "GET",
+          "path": "/class-lessons/find-by-class-session-id/:classSessionId",
+          "handler": "findByClassSessionId",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/class-lessons/reset-customized/:classSessionId",
+          "handler": "resetCustomized",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/class-lessons/send/:classSessionId",
+          "handler": "sendToStudents",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "SendLessonDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/class-lessons/session/:classSessionId",
+          "handler": "updateBySessionId",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateClassLessonDto"
+        },
+        {
+          "method": "GET",
+          "path": "/class-lessons/syllabus/:classId",
+          "handler": "getSyllabus",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/class-lessons/sync/:classId",
+          "handler": "syncFromCourse",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "forceSync"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/class-sessions",
+      "ten": "Buổi học",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /class-sessions/",
+        "xem": "GET /class-sessions/:id",
+        "tao": null,
+        "sua": null,
+        "xoa": "DELETE /class-sessions/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/class-sessions/count-by-date-range",
+          "handler": "countByDateRange",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "classId",
+            "fromDate",
+            "toDate"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/count-by-period",
+          "handler": "countByPeriod",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "classId",
+            "fromDate",
+            "months"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/find-all-by-class",
+          "handler": "findAllByClassId",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [
+            "classId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/find-by-class/:classId",
+          "handler": "findByClass",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "from",
+            "to"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/find-by-condition",
+          "handler": "",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/find-by-date",
+          "handler": "getListClassSessionDetail",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [
+            "date"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/find-session-exercises",
+          "handler": "findByCondition",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "classId",
+            "classSessionId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/staff-pending",
+          "handler": "getStaffPending",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "from",
+            "to",
+            "scope"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/class-shifts",
+      "ten": "Ca học",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /class-shifts/",
+        "xem": "GET /class-shifts/:id",
+        "tao": null,
+        "sua": "PUT /class-shifts/:id",
+        "xoa": "DELETE /class-shifts/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/class-shifts/:classId",
+          "handler": "create",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateClassShiftDto"
+        },
+        {
+          "method": "GET",
+          "path": "/class-shifts/find-by-class/:classId",
+          "handler": "findByClassId",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/class-teachers",
+      "ten": "Giáo viên của lớp",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /class-teachers/",
+        "xem": null,
+        "tao": "POST /class-teachers/",
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/class-teachers/:classId/:classShiftId/:staffId",
+          "handler": "findById",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-teachers/class/by-teacher",
+          "handler": "searchClassByTeacher",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "order"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/class-teachers/verify-session-time",
+          "handler": "verifySessionTime",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "ClassStaffDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/class-users",
+      "ten": "Học viên trong lớp",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /class-users/",
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/class-users/:classId",
+          "handler": "create",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateClassUserDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/class-users/:classId/:userId",
+          "handler": "delete",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/:classId/:userId",
+          "handler": "findById",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/class-users/:classId/:userId",
+          "handler": "update",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateClassUserDto"
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/count-review",
+          "handler": "countReview",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "classId",
+            "classSessionId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/count/:classId",
+          "handler": "countClassUsersByClassId",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-by-class-id/:classId",
+          "handler": "findClassUserByClassId",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "search",
+            "statusList",
+            "order"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-by-class-session/:classSessionId",
+          "handler": "findByClassSession",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-by-condition",
+          "handler": "findByCondition",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "classId",
+            "classSessionId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-by-user/:userId",
+          "handler": "findByUser",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "statusList"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-exercise",
+          "handler": "findExercise",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "search",
+            "status",
+            "classSessionId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-review",
+          "handler": "findReview",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "classId",
+            "classSessionId"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/classes",
+      "ten": "Lớp học",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /classes/",
+        "xem": "GET /classes/:id",
+        "tao": "POST /classes/",
+        "sua": "PUT /classes/:id",
+        "xoa": "DELETE /classes/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "PUT",
+          "path": "/classes/:id/update-status",
+          "handler": "updateStatus",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateStatusClassDto"
+        },
+        {
+          "method": "GET",
+          "path": "/classes/analytics",
+          "handler": "countClasses",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/export",
+          "handler": "export",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "keyword",
+            "statusList",
+            "courseIds"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/find-by-status",
+          "handler": "findAllByStatus",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "status"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/find-class-exercise-by-status",
+          "handler": "findClassExerciseByStatus",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [
+            "status"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/find-session-exercise-sent",
+          "handler": "findSessionExercise",
+          "quyen": "[RefEnum.STAFF]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/for-placement",
+          "handler": "findForPlacement",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerId",
+            "courseIds",
+            "keyword"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/general-information/:id",
+          "handler": "getGeneralInformationById",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/classrooms",
+      "ten": "Phòng học",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /classrooms/",
+        "xem": "GET /classrooms/:id",
+        "tao": "POST /classrooms/",
+        "sua": "PUT /classrooms/:id",
+        "xoa": "DELETE /classrooms/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/classrooms/available",
+          "handler": "findValidClassrooms",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "sessionTimeId"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/classrooms/check-seat-number",
+          "handler": "checkSeatNumber",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "classroomId",
+            "classId"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/config",
+      "ten": "Cấu hình",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /config/",
+        "xem": "GET /config/:id",
+        "tao": "POST /config/",
+        "sua": null,
+        "xoa": "DELETE /config/:id"
+      },
+      "tuyenKhac": []
+    },
+    {
+      "tienTo": "/contracts",
+      "ten": "Hợp đồng",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /contracts/",
+        "xem": "GET /contracts/:id",
+        "tao": "POST /contracts/",
+        "sua": "PUT /contracts/:id",
+        "xoa": "DELETE /contracts/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/contracts/:id/cancel",
+          "handler": "cancel",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CancelContractDto"
+        },
+        {
+          "method": "POST",
+          "path": "/contracts/admin/expire-overdue",
+          "handler": "expireOverdue",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/contracts/export",
+          "handler": "export",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "order",
+            "search"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/contracts/users/:userId/calculate",
+          "handler": "calculateByUserId",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/contracts/users/calculate",
+          "handler": "calculate",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/contracts/users/find",
+          "handler": "findAllByUserLogin",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "order"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/courses",
+      "ten": "Khoá học",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /courses/",
+        "xem": "GET /courses/:id",
+        "tao": "POST /courses/",
+        "sua": "PUT /courses/:id",
+        "xoa": "DELETE /courses/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/courses/export",
+          "handler": "export",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "order",
+            "search"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/crm",
+      "ten": "CRM: khách hàng, cơ hội, việc cần làm",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/crm/appointments/",
+          "handler": "findAll",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "order",
+            "search",
+            "tab",
+            "type",
+            "staffId",
+            "from",
+            "to"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/appointments/",
+          "handler": "create",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateCrmAppointmentDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/appointments/:id",
+          "handler": "update",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateCrmAppointmentDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/appointments/:id/cancel",
+          "handler": "cancel",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/appointments/:id/complete",
+          "handler": "complete",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CompleteCrmAppointmentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/appointments/calendar",
+          "handler": "calendar",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "from",
+            "to"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/appointments/counts",
+          "handler": "counts",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/appointments/today",
+          "handler": "today",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "mine"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/automation/catalog",
+          "handler": "catalog",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/automation/rules",
+          "handler": "findAll",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/automation/rules",
+          "handler": "create",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateAutomationRuleDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/crm/automation/rules/:id",
+          "handler": "remove",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/automation/rules/:id",
+          "handler": "findById",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/automation/rules/:id",
+          "handler": "update",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateAutomationRuleDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/automation/rules/:id/run",
+          "handler": "run",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/automation/rules/:id/runs",
+          "handler": "runs",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/automation/rules/preview",
+          "handler": "",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/",
+          "handler": "findAll",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "order",
+            "search",
+            "status",
+            "sourceId",
+            "assignedStaffId",
+            "staleDays"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/customers/",
+          "handler": "create",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateCrmCustomerDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/crm/customers/:id",
+          "handler": "delete",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/:id",
+          "handler": "findById",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/customers/:id",
+          "handler": "update",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateCrmCustomerDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/:id/activities",
+          "handler": "activities",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "opportunityId"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/customers/:id/activities",
+          "handler": "createActivity",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateCrmActivityDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/customers/:id/assign",
+          "handler": "assign",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "AssignCrmCustomerDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/customers/assign-bulk",
+          "handler": "assignBulk",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "AssignBulkCrmCustomerDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/export",
+          "handler": "export",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "order",
+            "search",
+            "status",
+            "sourceId",
+            "assignedStaffId",
+            "staleDays"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/customers/import",
+          "handler": "import",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/import-template",
+          "handler": "",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/stats",
+          "handler": "stats",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/opportunities/",
+          "handler": "findAll",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "order",
+            "search",
+            "stage",
+            "sourceId",
+            "assignedStaffId",
+            "courseId",
+            "closeFrom",
+            "closeTo"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/opportunities/",
+          "handler": "create",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateCrmOpportunityDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/opportunities/:id",
+          "handler": "findById",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/opportunities/:id",
+          "handler": "update",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateCrmOpportunityDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/opportunities/:id/lose",
+          "handler": "lose",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "LoseCrmOpportunityDto"
+        },
+        {
+          "method": "PATCH",
+          "path": "/crm/opportunities/:id/stage",
+          "handler": "move",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "MoveCrmOpportunityDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/opportunities/:id/win",
+          "handler": "",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/opportunities/export",
+          "handler": "export",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "order",
+            "search",
+            "stage",
+            "sourceId",
+            "assignedStaffId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/opportunities/kanban",
+          "handler": "kanban",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "search",
+            "sourceId",
+            "assignedStaffId",
+            "courseId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/opportunities/stats",
+          "handler": "stats",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/sla-policies/",
+          "handler": "findAll",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "includeInactive"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/sla-policies/",
+          "handler": "create",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateCrmSlaPolicyDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/crm/sla-policies/:id",
+          "handler": "delete",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/sla-policies/:id",
+          "handler": "update",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateCrmSlaPolicyDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/sources/",
+          "handler": "findAll",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "includeInactive"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/sources/",
+          "handler": "create",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateCrmSourceDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/crm/sources/:id",
+          "handler": "delete",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/sources/:id",
+          "handler": "update",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateCrmSourceDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/tasks/",
+          "handler": "findAll",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "order",
+            "search",
+            "tab",
+            "priority",
+            "assigneeStaffId",
+            "mine",
+            "dueFrom",
+            "dueTo",
+            "userId",
+            "classId",
+            "contractId",
+            "opportunityId",
+            "customerId",
+            "supportId"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/tasks/",
+          "handler": "create",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateCrmTaskDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/crm/tasks/:id",
+          "handler": "delete",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/tasks/:id",
+          "handler": "update",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateCrmTaskDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/tasks/:id/cancel",
+          "handler": "cancel",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/tasks/:id/done",
+          "handler": "done",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/tasks/counts",
+          "handler": "counts",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "mine"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/tasks/my-summary",
+          "handler": "mySummary",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "limit"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/districts",
+      "ten": "Quận/huyện",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /districts/",
+        "xem": null,
+        "tao": "POST /districts/",
+        "sua": null,
+        "xoa": "DELETE /districts/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/districts/find-by-province/:provinceId",
+          "handler": "findByProvinceId",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/exercise-comments",
+      "ten": "Bình luận bài tập",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /exercise-comments/",
+        "xem": "GET /exercise-comments/:id",
+        "tao": null,
+        "sua": "PUT /exercise-comments/:id",
+        "xoa": "DELETE /exercise-comments/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/exercise-comments/create-comment/:exerciseReportId",
+          "handler": "create",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "CommentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/exercise-comments/find-by-exercise-report-id/:exerciseReportId",
+          "handler": "findByExerciseReportId",
+          "quyen": "",
+          "thamSoTruyVan": [
+            "page",
+            "limit"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/files",
+      "ten": "Tệp",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/files/abort-multipart-upload",
+          "handler": "abortMultipartUpload",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "AbortMultipartUploadDto"
+        },
+        {
+          "method": "POST",
+          "path": "/files/complete-multipart-upload",
+          "handler": "completeMultipartUpload",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "CompleteMultipartUploadDto"
+        },
+        {
+          "method": "POST",
+          "path": "/files/confirm-upload",
+          "handler": "confirmUpload",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "ConfirmUploadDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/multiple",
+          "handler": "deleteMultiple",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "ids"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/files/presign-multipart-upload",
+          "handler": "presignMultipartUpload",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "PresignMultipartUploadDto"
+        },
+        {
+          "method": "POST",
+          "path": "/files/presign-upload",
+          "handler": "presignUpload",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "PresignUploadDto"
+        },
+        {
+          "method": "POST",
+          "path": "/files/upload",
+          "handler": "upload",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/functions",
+      "ten": "Chức năng",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/functions/find-all",
+          "handler": "findAll",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/health",
+      "ten": "Kiểm tra sống",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /health",
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/health/live",
+          "handler": "live",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/health/ready",
+          "handler": "ready",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/holidays",
+      "ten": "Ngày nghỉ",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /holidays/",
+        "xem": "GET /holidays/:id",
+        "tao": "POST /holidays/",
+        "sua": "PUT /holidays/:id",
+        "xoa": "DELETE /holidays/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/holidays/check/:date",
+          "handler": "checkHoliday",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/holidays/year/:year",
+          "handler": "getByYear",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerId"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/lessons",
+      "ten": "Bài học",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /lessons/",
+        "xem": "GET /lessons/:id",
+        "tao": "POST /lessons/",
+        "sua": "PUT /lessons/:id",
+        "xoa": "DELETE /lessons/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/lessons/course/:courseId",
+          "handler": "findByCourseId",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/lessons/course/:courseId/lesson/:lessonNumber",
+          "handler": "findByLessonNumber",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/lessons/course/:courseId/lesson/:lessonNumber",
+          "handler": "upsertByLessonNumber",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateLessonDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/makeup",
+      "ten": "Dạy bù / bổ trợ",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/makeup/needs",
+          "handler": "findNeeds",
+          "quyen": "MAKEUP_ROLES",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "order",
+            "search",
+            "centerId",
+            "status"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/makeup/needs",
+          "handler": "createNeed",
+          "quyen": "MAKEUP_ROLES",
+          "thamSoTruyVan": [],
+          "than": "CreateMakeupNeedDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/makeup/needs/:id",
+          "handler": "deleteNeed",
+          "quyen": "MAKEUP_ROLES",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/makeup/needs/:id/decline",
+          "handler": "declineNeed",
+          "quyen": "MAKEUP_ROLES",
+          "thamSoTruyVan": [],
+          "than": "DeclineMakeupNeedDto"
+        },
+        {
+          "method": "GET",
+          "path": "/makeup/sessions",
+          "handler": "findSessions",
+          "quyen": "MAKEUP_ROLES",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "order",
+            "centerId"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/makeup/sessions",
+          "handler": "createSession",
+          "quyen": "MAKEUP_ROLES",
+          "thamSoTruyVan": [],
+          "than": "CreateMakeupSessionDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/makeup/sessions/:id",
+          "handler": "cancelSession",
+          "quyen": "MAKEUP_ROLES",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/makeup/sessions/:id/confirm",
+          "handler": "confirmSession",
+          "quyen": "MAKEUP_ROLES",
+          "thamSoTruyVan": [],
+          "than": "ConfirmMakeupSessionDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/modules",
+      "ten": "Module",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/modules/find-all",
+          "handler": "findAll",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/modules/find-with-role/:roleId",
+          "handler": "findWithRole",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/notifications",
+      "ten": "Thông báo",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/notifications/find-by-user",
+          "handler": "findByUserLogin",
+          "quyen": "",
+          "thamSoTruyVan": [
+            "page",
+            "limit"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/notifications/read-all",
+          "handler": "readAll",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/notifications/read/:id",
+          "handler": "read",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/notifications/unread-count",
+          "handler": "unreadCount",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/parents",
+      "ten": "Phụ huynh",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /parents/",
+        "xem": "GET /parents/:id",
+        "tao": "POST /parents/",
+        "sua": null,
+        "xoa": "DELETE /parents/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/parents/find-by-phone/:phone",
+          "handler": "findByPhone",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/payment-appointment",
+      "ten": "Hẹn thanh toán",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": "POST /payment-appointment/",
+        "sua": "PUT /payment-appointment/:id",
+        "xoa": "DELETE /payment-appointment/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/payment-appointment/overdue",
+          "handler": "findOverdue",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/permissions",
+      "ten": "Quyền",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/permissions/find-all",
+          "handler": "findAll",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/post-attachments",
+      "ten": "Tệp đính kèm bài viết",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": "POST /post-attachments/",
+        "sua": null,
+        "xoa": "DELETE /post-attachments/:id"
+      },
+      "tuyenKhac": []
+    },
+    {
+      "tienTo": "/post-comments",
+      "ten": "Bình luận bài viết",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /post-comments/",
+        "xem": "GET /post-comments/:id",
+        "tao": null,
+        "sua": "PUT /post-comments/:id",
+        "xoa": "DELETE /post-comments/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/post-comments/create-comment/:postId",
+          "handler": "create",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "CommentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/post-comments/find-by-post/:postId",
+          "handler": "getByPostId",
+          "quyen": "",
+          "thamSoTruyVan": [
+            "page",
+            "limit"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/post-reaction",
+      "ten": "Cảm xúc bài viết",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /post-reaction/",
+        "xem": "GET /post-reaction/:id",
+        "tao": null,
+        "sua": null,
+        "xoa": "DELETE /post-reaction/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/post-reaction/create-post-reaction/:postId",
+          "handler": "create",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "CreatePostReactionDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/posts",
+      "ten": "Bài viết / bảng tin",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /posts/",
+        "xem": "GET /posts/:id",
+        "tao": "POST /posts/",
+        "sua": "PUT /posts/:id",
+        "xoa": "DELETE /posts/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/posts/all-post",
+          "handler": "getAllPost",
+          "quyen": "",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "type",
+            "important"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/posts/analytics",
+          "handler": "countStatus",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "search"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/posts/detail/:id",
+          "handler": "detail",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/posts/find-by-class-id",
+          "handler": "findByClassId",
+          "quyen": "",
+          "thamSoTruyVan": [
+            "page",
+            "limit",
+            "classId",
+            "type"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/posts/news",
+          "handler": "createNews",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateNewsDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/posts/news/:id",
+          "handler": "updateNews",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateNewsDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/provinces",
+      "ten": "Tỉnh/thành",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /provinces/",
+        "xem": null,
+        "tao": "POST /provinces/",
+        "sua": null,
+        "xoa": "DELETE /provinces/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/provinces/find-all",
+          "handler": "findAll",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/receipts",
+      "ten": "Biên lai học phí",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /receipts/",
+        "xem": "GET /receipts/:id",
+        "tao": "POST /receipts/",
+        "sua": "PUT /receipts/:id",
+        "xoa": "DELETE /receipts/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "PUT",
+          "path": "/receipts/accept/:id",
+          "handler": "accept",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "AcceptReceiptDto"
+        },
+        {
+          "method": "GET",
+          "path": "/receipts/find-by-contract/:contractId",
+          "handler": "findByContract",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/reservations",
+      "ten": "Bảo lưu",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /reservations/",
+        "xem": "GET /reservations/:id",
+        "tao": "POST /reservations/",
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/reservations/:id/approve",
+          "handler": "approve",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/reservations/:id/cancel",
+          "handler": "cancel",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/reservations/:id/reject",
+          "handler": "reject",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "RejectReservationDto"
+        },
+        {
+          "method": "POST",
+          "path": "/reservations/:id/resume",
+          "handler": "resume",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "ResumeReservationDto"
+        },
+        {
+          "method": "GET",
+          "path": "/reservations/find-by-user",
+          "handler": "findByUser",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/reservations/request",
+          "handler": "createRequest",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [],
+          "than": "CreateReservationRequestDto"
+        },
+        {
+          "method": "GET",
+          "path": "/reservations/returning-soon",
+          "handler": "findReturningSoon",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "days"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/role-modules",
+      "ten": "Quyền theo module",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/role-modules/create-or-update/:roleId",
+          "handler": "create",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateRoleModulesDto"
+        },
+        {
+          "method": "GET",
+          "path": "/role-modules/find-by-role/:roleId",
+          "handler": "findByRoleId",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/roles",
+      "ten": "Chức danh",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /roles/",
+        "xem": "GET /roles/:id",
+        "tao": "POST /roles/",
+        "sua": "PUT /roles/:id",
+        "xoa": "DELETE /roles/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/roles/find-all",
+          "handler": "findAll",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/schedule",
+      "ten": "Thời khoá biểu",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/schedule/availability",
+          "handler": "availability",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/calendar",
+          "handler": "calendar",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/me/calendar",
+          "handler": "myCalendar",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/me/weekly",
+          "handler": "myWeekly",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/teacher-grid",
+          "handler": "teacherGrid",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/time-slots/",
+          "handler": "list",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerId"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/time-slots/",
+          "handler": "create",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "CreateScheduleTimeSlotDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/schedule/time-slots/:id",
+          "handler": "delete",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/time-slots/:id",
+          "handler": "findById",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/schedule/time-slots/:id",
+          "handler": "update",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateScheduleTimeSlotDto"
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/weekly",
+          "handler": "weekly",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/session-exercise-attachments",
+      "ten": "Tệp bài tập",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /session-exercise-attachments/",
+        "xem": "GET /session-exercise-attachments/:id",
+        "tao": "POST /session-exercise-attachments/",
+        "sua": null,
+        "xoa": "DELETE /session-exercise-attachments/:id"
+      },
+      "tuyenKhac": []
+    },
+    {
+      "tienTo": "/session-exercise-report",
+      "ten": "Báo cáo bài tập",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /session-exercise-report/",
+        "xem": "GET /session-exercise-report/:id",
+        "tao": "POST /session-exercise-report/",
+        "sua": "PUT /session-exercise-report/:id",
+        "xoa": "DELETE /session-exercise-report/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/session-exercise-report/analytics",
+          "handler": "countByClassSessionId",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "classSessionId"
+          ],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/session-exercise-report/take-score/:id",
+          "handler": "takeScore",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "ExerciseReportDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/session-exercise-report-attachments",
+      "ten": "Tệp báo cáo bài tập",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /session-exercise-report-attachments/",
+        "xem": "GET /session-exercise-report-attachments/:id",
+        "tao": "POST /session-exercise-report-attachments/",
+        "sua": null,
+        "xoa": "DELETE /session-exercise-report-attachments/:id"
+      },
+      "tuyenKhac": []
+    },
+    {
+      "tienTo": "/session-exercises",
+      "ten": "Bài tập buổi học",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /session-exercises/",
+        "xem": "GET /session-exercises/:id",
+        "tao": "POST /session-exercises/",
+        "sua": null,
+        "xoa": "DELETE /session-exercises/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/session-exercises/find-by-class-session/:classSessionId",
+          "handler": "findByClassSessionId",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/session-packages",
+      "ten": "Gói buổi học",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /session-packages/",
+        "xem": "GET /session-packages/:id",
+        "tao": "POST /session-packages/",
+        "sua": "PUT /session-packages/:id",
+        "xoa": "DELETE /session-packages/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/session-packages/add-sessions",
+          "handler": "addSessions",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "AddSessionsDto"
+        },
+        {
+          "method": "POST",
+          "path": "/session-packages/adjust",
+          "handler": "adjustSessions",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "AdjustSessionsDto"
+        },
+        {
+          "method": "POST",
+          "path": "/session-packages/admin/notify-near-depletion",
+          "handler": "notifyNearDepletion",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "thresholdDays"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/balance/:userId",
+          "handler": "getBalance",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerId"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/session-packages/batch-balance",
+          "handler": "getBatchBalance",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/session-packages/check-expired",
+          "handler": "checkExpired",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/session-packages/deduct-session",
+          "handler": "deductSession",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "DeductSessionDto"
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/forecast/:userId",
+          "handler": "forecast",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerId",
+            "bufferDays"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/low-balance",
+          "handler": "getUsersWithLowBalance",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "threshold",
+            "centerId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/re-fee",
+          "handler": "getReFeeList",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "threshold"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/transactions/:userId",
+          "handler": "getTransactionHistory",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerId",
+            "page",
+            "limit"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/user/:userId",
+          "handler": "findByUserId",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerId"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/session-review",
+      "ten": "Nhận xét buổi học",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /session-review/",
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": "DELETE /session-review/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "PUT",
+          "path": "/session-review/:userId/:classSessionId",
+          "handler": "update",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateSessionReviewDto"
+        },
+        {
+          "method": "POST",
+          "path": "/session-review/multiple",
+          "handler": "createOrUpdate",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "classSessionId"
+          ],
+          "than": "CreateSessionReviewDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/session-review-criteria",
+      "ten": "Tiêu chí nhận xét",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /session-review-criteria/",
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": []
+    },
+    {
+      "tienTo": "/session-times",
+      "ten": "Khung giờ học",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /session-times/",
+        "xem": "GET /session-times/:id",
+        "tao": "POST /session-times/",
+        "sua": "PUT /session-times/:id",
+        "xoa": "DELETE /session-times/:id"
+      },
+      "tuyenKhac": []
+    },
+    {
+      "tienTo": "/settings",
+      "ten": "Cài đặt",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /settings/",
+        "xem": "GET /settings/:id",
+        "tao": "POST /settings/",
+        "sua": null,
+        "xoa": "DELETE /settings/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/settings/get-by-user",
+          "handler": "getByUserId",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/staffs",
+      "ten": "Nhân sự",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /staffs/",
+        "xem": "GET /staffs/:id",
+        "tao": "POST /staffs/",
+        "sua": "PUT /staffs/:id",
+        "xoa": "DELETE /staffs/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "PUT",
+          "path": "/staffs/",
+          "handler": "updateUserLogin",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateStaffDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/staffs/change-password",
+          "handler": "changePassword",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "ChangePasswordDto"
+        },
+        {
+          "method": "GET",
+          "path": "/staffs/export",
+          "handler": "exportOrderDataToExcel",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "order",
+            "search"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/staffs/get-by-email",
+          "handler": "getByEmail",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "EmailStaffDto"
+        },
+        {
+          "method": "POST",
+          "path": "/staffs/import",
+          "handler": "importFromExcel",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerIds"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/staffs/import/template",
+          "handler": "getImportTemplate",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/staffs/lock/:id",
+          "handler": "lock",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "LockStaffDto"
+        },
+        {
+          "method": "GET",
+          "path": "/staffs/profile",
+          "handler": "profile",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/staffs/reset-password/:id",
+          "handler": "resetPassword",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/staffs/teacher",
+          "handler": "createTeacher",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "NewStaffDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/support",
+      "ten": "Phiếu hỗ trợ",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /support/",
+        "xem": "GET /support/:id",
+        "tao": "POST /support/",
+        "sua": "PUT /support/:id",
+        "xoa": "DELETE /support/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/support/:id/archive",
+          "handler": "archive",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/support/:id/escalate",
+          "handler": "escalate",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "EscalateSupportDto"
+        },
+        {
+          "method": "POST",
+          "path": "/support/:id/reopen",
+          "handler": "reopen",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "ReopenSupportDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/support/:id/sla",
+          "handler": "updateSla",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateSupportSlaDto"
+        },
+        {
+          "method": "GET",
+          "path": "/support/counts",
+          "handler": "counts",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/support/find-by-user/",
+          "handler": "findByUser",
+          "quyen": "",
+          "thamSoTruyVan": [
+            "page",
+            "limit"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/support/handle-support/:id",
+          "handler": "handleSupport",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "HandleSupportsDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/support-comments",
+      "ten": "Bình luận hỗ trợ",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /support-comments/",
+        "xem": "GET /support-comments/:id",
+        "tao": null,
+        "sua": "PUT /support-comments/:id",
+        "xoa": "DELETE /support-comments/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "POST",
+          "path": "/support-comments/create-comment/:supportId",
+          "handler": "create",
+          "quyen": "",
+          "thamSoTruyVan": [],
+          "than": "CommentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/support-comments/find-by-support-id/:supportId",
+          "handler": "findByAbsenceRequestId",
+          "quyen": "",
+          "thamSoTruyVan": [
+            "page",
+            "limit"
+          ],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/user-preparations",
+      "ten": "Chuẩn bị đầu vào",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /user-preparations/",
+        "xem": "GET /user-preparations/:id",
+        "tao": "POST /user-preparations/",
+        "sua": "PUT /user-preparations/:id",
+        "xoa": "DELETE /user-preparations/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "PUT",
+          "path": "/user-preparations/cancel/:id",
+          "handler": "cancel",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/user-preparations/export",
+          "handler": "export",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "order",
+            "search"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/user-preparations/handle/:id",
+          "handler": "handleUserPreparation",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "HandleUserPreparationDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/user-preparations/processed/:id",
+          "handler": "processed",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/user-sessions",
+      "ten": "Buổi học của học viên",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/user-sessions/:classId/:classSessionId",
+          "handler": "findById",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/user-sessions/:userId/:classSessionId",
+          "handler": "update",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "UpdateUserSessionDto"
+        },
+        {
+          "method": "GET",
+          "path": "/user-sessions/find-by-user/:userId/:classSessionId",
+          "handler": "findByUserIdAndClassSessionId",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/user-sessions/find/:classSessionId",
+          "handler": "findUserSessionByUserLogin",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/user-sessions/multiple",
+          "handler": "createOrUpdate",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "classSessionId"
+          ],
+          "than": "CreateUserSessionDto"
+        }
+      ]
+    },
+    {
+      "tienTo": "/users",
+      "ten": "Học viên",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /users/",
+        "xem": "GET /users/:id",
+        "tao": "POST /users/",
+        "sua": "PUT /users/:id",
+        "xoa": "DELETE /users/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "PUT",
+          "path": "/users/",
+          "handler": "update",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [],
+          "than": "UpdateUserDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/users/:id/card-code",
+          "handler": "assignCardCode",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "AssignCardCodeDto"
+        },
+        {
+          "method": "GET",
+          "path": "/users/accounts",
+          "handler": "accounts",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/users/export",
+          "handler": "exportOrderDataToExcel",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "order",
+            "search"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/users/import",
+          "handler": "importFromExcel",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "centerId"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/users/import/template",
+          "handler": "getImportTemplate",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/users/profile",
+          "handler": "profile",
+          "quyen": "[RefEnum.USER]",
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/version",
+      "ten": "Phiên bản",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /version",
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": []
+    },
+    {
+      "tienTo": "/wards",
+      "ten": "Phường/xã",
+      "module": "lõi",
+      "crud": {
+        "lietKe": "GET /wards/",
+        "xem": null,
+        "tao": "POST /wards/",
+        "sua": null,
+        "xoa": "DELETE /wards/:id"
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/wards/find-by-district/:districtId",
+          "handler": "findByProvinceId",
+          "quyen": null,
+          "thamSoTruyVan": [],
+          "than": null
+        }
+      ]
+    },
+    {
+      "tienTo": "/zalo",
+      "ten": "Zalo",
+      "module": "lõi",
+      "crud": {
+        "lietKe": null,
+        "xem": null,
+        "tao": null,
+        "sua": null,
+        "xoa": null
+      },
+      "tuyenKhac": [
+        {
+          "method": "GET",
+          "path": "/zalo/auth/callback",
+          "handler": "authCallback",
+          "quyen": null,
+          "thamSoTruyVan": [
+            "code",
+            "state",
+            "oa_id"
+          ],
+          "than": null
+        },
+        {
+          "method": "POST",
+          "path": "/zalo/auth/refresh",
+          "handler": "forceRefresh",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/zalo/auth/status",
+          "handler": "getStatus",
+          "quyen": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/zalo/auth/url",
+          "handler": "getAuthUrl",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [
+            "returnUrl"
+          ],
+          "than": null
+        },
+        {
+          "method": "GET",
+          "path": "/zalo/config",
+          "handler": "getConfig",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": null
+        },
+        {
+          "method": "PUT",
+          "path": "/zalo/config",
+          "handler": "setConfig",
+          "quyen": "[RefEnum.ADMIN]",
+          "thamSoTruyVan": [],
+          "than": "SetZaloConfigDto"
+        }
+      ]
+    }
+  ]
+}

@@ -1,9 +1,10 @@
 /**
  * Kho này CommonJS, y như `clazzi-api` — cố ý.
  *
- * Trước đây nó là ESM (`"type": "module"`) và phải chạy Jest ở chế độ ESM thật. Từ lúc lõi 27
- * công cụ chuyển về `clazzi-api` (CommonJS) và kho này nhập thẳng từ đó, giữ hai hệ module khác
- * nhau chỉ đổi lấy một chồng cấu hình vá víu. Một hệ cho cả hai kho thì mọi thứ tự chạy.
+ * Lõi MCP giờ là GÓI trong chính kho này (`src/`, xuất qua `src/index.ts`); các host (clazzi-api,
+ * gecko, …) và bộ nối stdio đều nhập cùng một lõi ấy. Giữ CommonJS cho khớp `clazzi-api` để lõi
+ * chép ngược qua lại không vấp hệ module. Test là hộp cát module theo TỪNG TỆP, nên mỗi tệp gọi
+ * `datCauHinh(...)` riêng mà singleton cấu hình không lẫn sang tệp khác.
  */
 module.exports = {
   testEnvironment: 'node',
