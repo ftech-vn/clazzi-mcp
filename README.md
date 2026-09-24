@@ -69,7 +69,20 @@ pnpm build       # tsc -p tsconfig.build.json → dist/ (JS + .d.ts, SDK-free)
 pnpm liet-ke     # client MCP stdio THẬT: bắt tay → listTools → gọi <th>_trang_thai
 ```
 
-## Tiêu thụ trong Docker CI — điểm cần quyết
+## Tiêu thụ qua git (host nhập gói)
+
+Host khai dependency ghim theo TAG (đừng nhánh động — build phải tái lập):
+
+```jsonc
+"@ftech-vn/clazzi-mcp": "github:ftech-vn/clazzi-mcp#v0.3.1"
+```
+
+**`dist/` được COMMIT vào kho.** Lý do: pnpm v10+ CHẶN build script của git dep (báo
+`ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED`), nên không thể để `prepare` tự dựng `dist` lúc cài. Commit
+`dist` sẵn thì `pnpm install --frozen-lockfile` trong Docker chỉ việc chép — không script, không
+chìa, tái lập được. **Đổi mã nguồn `src/` thì phải `pnpm build` rồi commit `dist` + gắn tag mới.**
+
+## Tiêu thụ trong Docker CI — đã gỡ chặn (kho công khai)
 
 Cả `clazzi-api` và gecko dựng ảnh bằng `pnpm install --frozen-lockfile` trong ngữ cảnh CHỈ repo
 đó. Để một host nhập gói private này lúc build ảnh, cần chọn MỘT cách:
@@ -80,5 +93,5 @@ Cả `clazzi-api` và gecko dựng ảnh bằng `pnpm install --frozen-lockfile`
    dựng ảnh của từng host.
 3. **Registry** (GitHub Packages / npm private) → cần quyền `write:packages` để phát hành.
 
-Chưa chọn cách này thì host chưa nhập gói được lúc build — đó là lý do bước de-dup ở clazzi-api /
-gecko phải chờ quyết định, không đẩy `main` bừa (đẩy = dựng ảnh = lên hệ khách trả tiền).
+Kho `clazzi-mcp` nay CÔNG KHAI nên đường (1) đã chọn: host kéo `git+https` không cần chìa. Vẫn
+nhớ đẩy `main` host = dựng ảnh = lên hệ khách — nghiệm thu (tsc+jest+dựng ảnh cục bộ) xong mới đẩy.

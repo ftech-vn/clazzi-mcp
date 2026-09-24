@@ -13,7 +13,6 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "prepare": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "start": "tsx src/bo-noi/server.ts",
     "liet-ke": "tsx scripts/liet-ke-cong-cu.ts",
