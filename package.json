@@ -1,6 +1,6 @@
 {
   "name": "@ftech-vn/clazzi-mcp",
-  "version": "0.3.0",
+  "version": "0.3.2",
   "private": true,
   "description": "Gói lõi MCP dùng chung cho CLAZZI/gecko/knb/peptalk + bộ nối stdio",
   "engines": {

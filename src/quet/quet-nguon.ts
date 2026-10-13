@@ -75,7 +75,9 @@ export function timTepController(goc: string): string[] {
 }
 
 /**
- * Bản kê module: ánh xạ tiền tố tuyến → mã module. Đọc từ `src/modules/<ten>/ban-ke.ts`.
+ * Bản kê module: ánh xạ tiền tố tuyến → mã module. Đọc từ `src/modules/<ten>/manifest.ts`
+ * (`{ prefix, module }`). Vẫn đọc khuôn cũ `ban-ke.ts` (`{ tienTo, module }`) cho các kho chưa đổi
+ * tên sang tiếng Anh — clazzi-api đổi ngày 13/10/2026.
  * Thứ tự khai báo có ý nghĩa: nhóm `/crm` gom bảy controller mang bốn mã module khác nhau, và ta
  * lấy mã của mục ĐẦU TIÊN — cùng luật mà `CHUC-NANG-VA-API.md` đã dùng (`/crm` → `CUSTM`).
  */
@@ -84,10 +86,10 @@ export function docBanKeModule(goc: string): { tienTo: string; module: string }[
   const thuMucModule = join(goc, 'src', 'modules');
   if (!existsSync(thuMucModule)) return ra;
   for (const m of readdirSync(thuMucModule).sort()) {
-    const tep = join(thuMucModule, m, 'ban-ke.ts');
-    if (!existsSync(tep)) continue;
+    const tep = [join(thuMucModule, m, 'manifest.ts'), join(thuMucModule, m, 'ban-ke.ts')].find(t => existsSync(t));
+    if (!tep) continue;
     const noiDung = readFileSync(tep, 'utf8');
-    const re = /tienTo:\s*['"`](.*?)['"`]\s*,\s*module:\s*['"`](.*?)['"`]/g;
+    const re = /(?:prefix|tienTo):\s*['"`](.*?)['"`]\s*,\s*module:\s*['"`](.*?)['"`]/g;
     let k: RegExpExecArray | null;
     while ((k = re.exec(noiDung)) !== null) ra.push({ tienTo: k[1], module: k[2] });
   }

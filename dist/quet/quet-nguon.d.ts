@@ -3,7 +3,9 @@ import type { Crud, DanhMuc, Tuyen } from '../loi/kieu';
 export declare function nhomCuaDuongDan(path: string): string;
 export declare function timTepController(goc: string): string[];
 /**
- * Bản kê module: ánh xạ tiền tố tuyến → mã module. Đọc từ `src/modules/<ten>/ban-ke.ts`.
+ * Bản kê module: ánh xạ tiền tố tuyến → mã module. Đọc từ `src/modules/<ten>/manifest.ts`
+ * (`{ prefix, module }`). Vẫn đọc khuôn cũ `ban-ke.ts` (`{ tienTo, module }`) cho các kho chưa đổi
+ * tên sang tiếng Anh — clazzi-api đổi ngày 13/10/2026.
  * Thứ tự khai báo có ý nghĩa: nhóm `/crm` gom bảy controller mang bốn mã module khác nhau, và ta
  * lấy mã của mục ĐẦU TIÊN — cùng luật mà `CHUC-NANG-VA-API.md` đã dùng (`/crm` → `CUSTM`).
  */
