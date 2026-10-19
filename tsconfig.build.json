@@ -9,6 +9,6 @@
     "rootDir": "src",
     "types": ["node"]
   },
-  "include": ["src/index.ts", "src/loi/**/*.ts", "src/quet/**/*.ts", "src/cau-hinh.ts", "src/nen-tang.ts"],
-  "exclude": ["node_modules", "src/bo-noi/**", "tests/**", "scripts/**", "**/*.spec.ts"]
+  "include": ["src/index.ts", "src/core/**/*.ts", "src/scanner/**/*.ts", "src/config.ts", "src/platform.ts"],
+  "exclude": ["node_modules", "src/stdio/**", "tests/**", "scripts/**", "**/*.spec.ts"]
 }

@@ -4,15 +4,15 @@ Gói **lõi MCP dùng chung** cho các máy chủ CLAZZI (clazzi, gecko, và sau
 **bộ nối stdio** cho người trong đội.
 
 Trước đây mỗi kho máy chủ giữ một BẢN CHÉP của lõi 27 công cụ MCP (`src/mcp/loi`, `src/mcp/quet`)
-và chúng đã trôi khỏi nhau (`cong-cu.ts` lệch 102 dòng, `quet-nguon.ts` 92, `http.ts` 61…). Kho
+và chúng đã trôi khỏi nhau (`tools.ts` lệch 102 dòng, `scan-source.ts` 92, `http.ts` 61…). Kho
 này gom lõi ấy về MỘT chỗ; mỗi host chỉ còn mang theo bảng cấu hình thương hiệu của mình.
 
 ## Ba tầng
 
 | Tầng | Là gì | Ở đâu |
 |---|---|---|
-| **A — Lõi thuần** | Khai/chạy công cụ, dịch lỗi, ẩn khoá, gắn tên bản, scanner mã nguồn, vá crypto Node 18. KHÔNG nhập `@modelcontextprotocol/sdk`. | `src/loi/`, `src/quet/`, `src/cau-hinh.ts`, `src/nen-tang.ts` → xuất qua `src/index.ts` |
-| **B — Dữ liệu theo thương hiệu** | `MANG` (tên công cụ + nhóm), `TEN_NHOM`, `daBiet`, tên biến môi trường, tiền tố khoá, và `danh-muc.json` sinh tự động. | `src/bo-noi/du-lieu/<thương-hiệu>/` |
+| **A — Lõi thuần** | Khai/chạy công cụ, dịch lỗi, ẩn khoá, gắn tên bản, scanner mã nguồn, vá crypto Node 18. KHÔNG nhập `@modelcontextprotocol/sdk`. | `src/core/`, `src/scanner/`, `src/config.ts`, `src/platform.ts` → xuất qua `src/index.ts` |
+| **B — Dữ liệu theo thương hiệu** | `DOMAINS` (tên công cụ + nhóm), `GROUP_NAMES`, `daBiet`, tên biến môi trường, tiền tố khoá, và `catalog.json` sinh tự động. | `src/stdio/data/<thương-hiệu>/` |
 | **C — Adapter host** | Tuyến `/mcp`, `may-chu`, `ban-nay`, `huong-dan-cam` — nơi SDK xuất hiện. | Nằm trong TỪNG kho máy chủ (`clazzi-api`, gecko, …), không trong gói |
 
 Bất biến quan trọng nhất: **Tầng A không nhập SDK**, nên bề mặt `.d.ts` của gói không tham chiếu
@@ -22,17 +22,17 @@ kiểu nào của SDK và biên dịch được trên **TypeScript 4.6** (knb / 
 ## Dùng trong một host (Tầng C)
 
 ```ts
-import { datCauHinh, dinhNghiaCongCu, chayCongCu, vaCrypto } from '@ftech-vn/clazzi-mcp';
-import { CLAZZI } from './du-lieu-cua-toi'; // CauHinhThuongHieu của host
+import { setConfig, defineTools, runTool, patchCrypto } from '@ftech-vn/clazzi-mcp';
+import { CLAZZI } from './du-lieu-cua-toi'; // BrandConfig của host
 
-vaCrypto();          // vá globalThis.crypto cho Node 18 — TRƯỚC khi dựng transport SDK
-datCauHinh(CLAZZI);  // MỘT LẦN lúc khởi động: thương hiệu là hằng của cả tiến trình
-// … rồi setRequestHandler(ListTools → dinhNghiaCongCu(), CallTool → chayCongCu(phien, ten, args))
+patchCrypto();          // vá globalThis.crypto cho Node 18 — TRƯỚC khi dựng transport SDK
+setConfig(CLAZZI);  // MỘT LẦN lúc khởi động: thương hiệu là hằng của cả tiến trình
+// … rồi setRequestHandler(ListTools → defineTools(), CallTool → runTool(phien, ten, args))
 ```
 
 Vì sao là singleton đặt-một-lần chứ không luồn tham số: **danh tính người gọi (khoá) đổi theo
-từng lượt gọi** (đi trong `Phien`), còn **thương hiệu đổi theo từng tiến trình** (một tiến trình
-`clazzi-api` chỉ phục vụ `clazzi`). Xem `src/cau-hinh.ts`.
+từng lượt gọi** (đi trong `Session`), còn **thương hiệu đổi theo từng tiến trình** (một tiến trình
+`clazzi-api` chỉ phục vụ `clazzi`). Xem `src/config.ts`.
 
 ## Bộ nối stdio (người trong đội)
 
@@ -55,8 +55,8 @@ Danh mục là ẢNH CHỤP mã nguồn máy chủ. Sinh lại mỗi khi control
 trong MCP:
 
 ```bash
-pnpm sinh:clazzi   # quét ../clazzi-api          → src/bo-noi/du-lieu/clazzi/danh-muc.json
-pnpm sinh:gecko    # quét ../../gecko/server-api  → src/bo-noi/du-lieu/gecko/danh-muc.json
+pnpm gen:clazzi   # quét ../clazzi-api          → src/stdio/data/clazzi/catalog.json
+pnpm gen:gecko    # quét ../../gecko/server-api  → src/stdio/data/gecko/catalog.json
 ```
 
 ## Kiểm
@@ -66,7 +66,7 @@ pnpm typecheck   # tsc --noEmit
 pnpm test        # jest — luật lõi + smoke hai thương hiệu + gọi mạng thật tới api-demo
 pnpm lint        # eslint (chặn console.log: stdout là kênh JSON-RPC)
 pnpm build       # tsc -p tsconfig.build.json → dist/ (JS + .d.ts, SDK-free)
-pnpm liet-ke     # client MCP stdio THẬT: bắt tay → listTools → gọi <th>_trang_thai
+pnpm list-tools     # client MCP stdio THẬT: bắt tay → listTools → gọi <th>_trang_thai
 ```
 
 ## Tiêu thụ qua git (host nhập gói)
@@ -74,8 +74,16 @@ pnpm liet-ke     # client MCP stdio THẬT: bắt tay → listTools → gọi <t
 Host khai dependency ghim theo TAG (đừng nhánh động — build phải tái lập):
 
 ```jsonc
-"@ftech-vn/clazzi-mcp": "github:ftech-vn/clazzi-mcp#v0.3.1"
+"@ftech-vn/clazzi-mcp": "github:ftech-vn/clazzi-mcp#v0.4.0"
 ```
+
+**v0.4.0 đổi toàn bộ tên xuất sang tiếng Anh** (`datCauHinh` → `setConfig`, `chayCongCu` → `runTool`,
+`dinhNghiaCongCu` → `defineTools`, `Phien` → `Session` {`deployment`, `apiKey`, …}, `CauHinhThuongHieu`
+→ `BrandConfig`, danh mục JSON đổi khoá: `nhom` → `groups`, `tienTo` → `prefix`, `crud.lietKe` → `crud.list`…).
+Hợp đồng với client MCP KHÔNG đổi: tên công cụ (`clazzi_goi`…), tham số (`doiTuong`, `viec`, `duLieu`,
+`duongDan`…), giá trị `viec` (`liet_ke`…) và khoá JSON trong kết quả công cụ giữ nguyên. Host còn ghim
+`v0.3.x` (gecko, knb, peptalk) vẫn chạy như cũ; khi nâng lên `v0.4.0` phải đổi tên theo `src/index.ts`
+và chuyển danh mục JSON sang khoá mới (sinh lại bằng `scanRepo`).
 
 **`dist/` được COMMIT vào kho.** Lý do: pnpm v10+ CHẶN build script của git dep (báo
 `ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED`), nên không thể để `prepare` tự dựng `dist` lúc cài. Commit

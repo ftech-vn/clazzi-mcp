@@ -1,6 +1,6 @@
 {
   "name": "@ftech-vn/clazzi-mcp",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "private": true,
   "description": "Gói lõi MCP dùng chung cho CLAZZI/gecko/knb/peptalk + bộ nối stdio",
   "engines": {
@@ -14,10 +14,10 @@
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "start": "tsx src/bo-noi/server.ts",
-    "liet-ke": "tsx scripts/liet-ke-cong-cu.ts",
-    "sinh:clazzi": "tsx scripts/sinh-danh-muc.ts clazzi ../clazzi-api",
-    "sinh:gecko": "tsx scripts/sinh-danh-muc.ts gecko ../../gecko/server-api",
+    "start": "tsx src/stdio/server.ts",
+    "list-tools": "tsx scripts/list-tools.ts",
+    "gen:clazzi": "tsx scripts/generate-catalog.ts clazzi ../clazzi-api",
+    "gen:gecko": "tsx scripts/generate-catalog.ts gecko ../../gecko/server-api",
     "test": "jest",
     "lint": "eslint .",
     "kiem": "tsc --noEmit && jest && eslint ."
