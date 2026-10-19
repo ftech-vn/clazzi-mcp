@@ -1,25 +1,25 @@
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-import { datCauHinh } from '../src/cau-hinh';
-import { GECKO } from '../src/bo-noi/du-lieu/gecko';
-import { dinhNghiaCongCu, chayCongCu } from '../src/loi/cong-cu';
-import { napDanhMuc } from '../src/loi/danh-muc';
-import { mangCuaNhom } from '../src/loi/mang';
-import { nhanDienBan } from '../src/loi/ban';
-import { quetKho } from '../src/quet/quet-nguon';
-import type { Phien } from '../src/loi/phien';
+import { setConfig } from '../src/config';
+import { GECKO } from '../src/stdio/data/gecko';
+import { defineTools, runTool } from '../src/core/tools';
+import { loadCatalog } from '../src/core/catalog';
+import { domainOfGroup } from '../src/core/domains';
+import { identifyDeployment } from '../src/core/deployment';
+import { scanRepo } from '../src/scanner/scan-source';
+import type { Session } from '../src/core/session';
 
 /**
  * Thương hiệu GECKO trên CÙNG một lõi — chứng minh việc tiêm cấu hình thật sự đổi tiền tố, danh
  * mục, tên bản; không phải clazzi đội lốt. Đây là lý do cả bộ tồn tại: một lõi, nhiều thương hiệu.
  */
-datCauHinh(GECKO);
-const MANG = GECKO.mang;
-const phien = (khoa: string | null = null): Phien => ({ ban: nhanDienBan('https://otm-api.f-tech.vn'), khoa });
+setConfig(GECKO);
+const DOMAINS = GECKO.domains;
+const session = (apiKey: string | null = null): Session => ({ deployment: identifyDeployment('https://otm-api.f-tech.vn'), apiKey: apiKey });
 
 describe('công cụ gecko mang tiền tố gecko_, không phải clazzi_', () => {
-  const cc = dinhNghiaCongCu();
+  const cc = defineTools();
 
   it('có 3 công cụ meta tiền tố gecko_', () => {
     expect(cc.map(c => c.name)).toEqual(expect.arrayContaining(['gecko_trang_thai', 'gecko_mo_ta', 'gecko_goi']));
@@ -27,31 +27,31 @@ describe('công cụ gecko mang tiền tố gecko_, không phải clazzi_', () =
   });
 
   it('mọi mảng gecko phủ trong danh mục gecko', () => {
-    const dm = napDanhMuc();
-    expect(dm.nhom.filter(n => !mangCuaNhom(n.tienTo)).map(n => n.tienTo)).toEqual([]);
-    const coThat = new Set(dm.nhom.map(n => n.tienTo));
-    expect(MANG.flatMap(m => m.nhom).filter(n => !coThat.has(n))).toEqual([]);
+    const catalog = loadCatalog();
+    expect(catalog.groups.filter(n => !domainOfGroup(n.prefix)).map(n => n.prefix)).toEqual([]);
+    const existing = new Set(catalog.groups.map(n => n.prefix));
+    expect(DOMAINS.flatMap(m => m.groups).filter(n => !existing.has(n))).toEqual([]);
   });
 
   it('thiếu khoá thì hướng dẫn dùng đúng tên máy chủ gecko và biến GECKO_API_KEY', async () => {
-    const dm = napDanhMuc();
-    const mangCoCrud = MANG.find(m => m.nhom.some(t => dm.nhom.find(n => n.tienTo === t)?.crud.lietKe));
-    const nhomCoCrud = mangCoCrud?.nhom.find(t => dm.nhom.find(n => n.tienTo === t)?.crud.lietKe);
-    const { text, loi } = await chayCongCu(phien(), String(mangCoCrud?.ten), { doiTuong: nhomCoCrud, viec: 'liet_ke' });
-    expect(loi).toBe(true);
+    const catalog = loadCatalog();
+    const domainWithCrud = DOMAINS.find(m => m.groups.some(t => catalog.groups.find(n => n.prefix === t)?.crud.list));
+    const groupWithCrud = domainWithCrud?.groups.find(t => catalog.groups.find(n => n.prefix === t)?.crud.list);
+    const { text, isError } = await runTool(session(), String(domainWithCrud?.name), { doiTuong: groupWithCrud, viec: 'liet_ke' });
+    expect(isError).toBe(true);
     expect(text).toContain('claude mcp add --transport http gecko https://otm-api.f-tech.vn/mcp');
     expect(text).toContain('GECKO_API_KEY');
   });
 });
 
-const GOC_GECKO = resolve(__dirname, '../../../gecko/server-api');
-const coNguon = existsSync(resolve(GOC_GECKO, 'src/controllers'));
+const GECKO_ROOT = resolve(__dirname, '../../../gecko/server-api');
+const hasSource = existsSync(resolve(GECKO_ROOT, 'src/controllers'));
 
 describe('danh mục gecko đóng gói khớp mã nguồn otm-api', () => {
-  (coNguon ? it : it.skip)('số tuyến/nhóm khớp bản quét tươi', () => {
-    const tuoi = quetKho(GOC_GECKO, GECKO.tenNhom);
-    const daLuu = napDanhMuc();
-    expect({ soTuyen: tuoi.soTuyen, soNhom: tuoi.soNhom }).toEqual({ soTuyen: daLuu.soTuyen, soNhom: daLuu.soNhom });
-    expect(tuoi.nhom.map(n => n.tienTo)).toEqual(daLuu.nhom.map(n => n.tienTo));
+  (hasSource ? it : it.skip)('số tuyến/nhóm khớp bản quét tươi', () => {
+    const fresh = scanRepo(GECKO_ROOT, GECKO.groupNames);
+    const stored = loadCatalog();
+    expect({ routeCount: fresh.routeCount, groupCount: fresh.groupCount }).toEqual({ routeCount: stored.routeCount, groupCount: stored.groupCount });
+    expect(fresh.groups.map(n => n.prefix)).toEqual(stored.groups.map(n => n.prefix));
   });
 });

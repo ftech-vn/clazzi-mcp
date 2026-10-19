@@ -1,0 +1,3914 @@
+{
+  "scannedAt": "2026-09-24T19:11:54.142Z",
+  "routeCount": 520,
+  "groupCount": 71,
+  "groups": [
+    {
+      "prefix": "/absence-request-comments",
+      "name": "Bình luận đơn nghỉ",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /absence-request-comments/",
+        "get": "GET /absence-request-comments/:id",
+        "create": null,
+        "update": "PUT /absence-request-comments/:id",
+        "remove": "DELETE /absence-request-comments/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/absence-request-comments/create-comment/:absenceRequestId",
+          "handler": "create",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "CommentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/absence-request-comments/find-by-absence-request-id/:absenceRequestId",
+          "handler": "findByAbsenceRequestId",
+          "authorized": "",
+          "queryParams": [
+            "page",
+            "limit"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/absence-requests",
+      "name": "Xin nghỉ",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /absence-requests/",
+        "get": "GET /absence-requests/:id",
+        "create": "POST /absence-requests/",
+        "update": null,
+        "remove": "DELETE /absence-requests/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "PUT",
+          "path": "/absence-requests/approve/:id",
+          "handler": "approveAbsence",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "ApproveAbsenceRequestDto"
+        },
+        {
+          "method": "GET",
+          "path": "/absence-requests/find-by-user",
+          "handler": "findAllAbsentRequestUser",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/accounts",
+      "name": "Tài khoản",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/accounts/biometric-disable",
+          "handler": "biometricDisable",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/accounts/biometric-enable",
+          "handler": "biometricEnable",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "BiometricEnableDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/api-keys",
+      "name": "Khoá API",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /api-keys/",
+        "get": null,
+        "create": "POST /api-keys/",
+        "update": null,
+        "remove": "DELETE /api-keys/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/api-keys/huong-dan-cam",
+          "handler": "huongDan",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/app-configs",
+      "name": "Cấu hình ứng dụng",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /app-configs/",
+        "get": "GET /app-configs/:id",
+        "create": "POST /app-configs/",
+        "update": "PUT /app-configs/:id",
+        "remove": "DELETE /app-configs/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/app-configs/key/:key",
+          "handler": "getByKey",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/attendance-sheet",
+      "name": "Điểm danh",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /attendance-sheet/",
+        "get": "GET /attendance-sheet/:id",
+        "create": "POST /attendance-sheet/",
+        "update": null,
+        "remove": "DELETE /attendance-sheet/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/attendance-sheet/analytics",
+          "handler": "countClasses",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "classId",
+            "classSessionId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/attendance-sheet/checkin",
+          "handler": "",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/attendance-sheet/create-or-update",
+          "handler": "createOrUpdate",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "classSessionId"
+          ],
+          "bodyDto": "CreateOrUpdateAttendanceSheetDto"
+        },
+        {
+          "method": "GET",
+          "path": "/attendance-sheet/history/:classId",
+          "handler": "attendanceHistory",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/auth",
+      "name": "Đăng nhập / xác thực",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/auth/refresh-token",
+          "handler": "refreshToken",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "RefreshTokenDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/staff/forgot-password",
+          "handler": "forgotPassword",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "ForgotDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/staff/google",
+          "handler": "staffLoginGoogle",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "GoogleLoginDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/staff/login",
+          "handler": "staffLogin",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "LoginDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/staff/update-password",
+          "handler": "resetPassword",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "UpdateNewPasswordDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/staffs/verify-email",
+          "handler": "verifyEmail",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "VerifyEmailDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/update-password",
+          "handler": "updatePassword",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "UpdateNewPasswordDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/user/login",
+          "handler": "login",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "UserLoginDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/user/resent-otp",
+          "handler": "resentOtp",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "UserLoginDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/user/switch-account",
+          "handler": "switchAccount",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": "UserSwitchDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/user/verify-otp",
+          "handler": "userVerifyOtp",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "UserVerifyOtpDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/users/biometric",
+          "handler": "biometricLogin",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "BiometricLoginDto"
+        },
+        {
+          "method": "POST",
+          "path": "/auth/verify-recovery-code",
+          "handler": "verifyRecoveryCode",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "VerifyRecoveryDto"
+        },
+        {
+          "method": "GET",
+          "path": "/auth/verify-recovery-code/:email/:code",
+          "handler": "verifyRecoveryCodeFromUrl",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/catalog",
+      "name": "Danh mục bán",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/catalog/plugins",
+          "handler": "plugins",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/centers",
+      "name": "Cơ sở / trung tâm",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /centers/",
+        "get": "GET /centers/:id",
+        "create": "POST /centers/",
+        "update": "PUT /centers/:id",
+        "remove": "DELETE /centers/:id"
+      },
+      "otherRoutes": []
+    },
+    {
+      "prefix": "/class-lessons",
+      "name": "Bài của lớp",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /class-lessons/",
+        "get": "GET /class-lessons/:id",
+        "create": "POST /class-lessons/",
+        "update": null,
+        "remove": "DELETE /class-lessons/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "PUT",
+          "path": "/class-lessons/:classSessionId",
+          "handler": "createOrUpdate",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateClassLessonDto"
+        },
+        {
+          "method": "GET",
+          "path": "/class-lessons/find-by-class-session-id/:classSessionId",
+          "handler": "findByClassSessionId",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/class-lessons/reset-customized/:classSessionId",
+          "handler": "resetCustomized",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/class-lessons/send/:classSessionId",
+          "handler": "sendToStudents",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "SendLessonDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/class-lessons/session/:classSessionId",
+          "handler": "updateBySessionId",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateClassLessonDto"
+        },
+        {
+          "method": "GET",
+          "path": "/class-lessons/syllabus/:classId",
+          "handler": "getSyllabus",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/class-lessons/sync/:classId",
+          "handler": "syncFromCourse",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "forceSync"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/class-sessions",
+      "name": "Buổi học",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /class-sessions/",
+        "get": "GET /class-sessions/:id",
+        "create": null,
+        "update": null,
+        "remove": "DELETE /class-sessions/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/class-sessions/count-by-date-range",
+          "handler": "countByDateRange",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "classId",
+            "fromDate",
+            "toDate"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/count-by-period",
+          "handler": "countByPeriod",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "classId",
+            "fromDate",
+            "months"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/find-all-by-class",
+          "handler": "findAllByClassId",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [
+            "classId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/find-by-class/:classId",
+          "handler": "findByClass",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "from",
+            "to"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/find-by-condition",
+          "handler": "",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/find-by-date",
+          "handler": "getListClassSessionDetail",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [
+            "date"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-sessions/find-session-exercises",
+          "handler": "findByCondition",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "classId",
+            "classSessionId"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/class-shifts",
+      "name": "Ca học",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /class-shifts/",
+        "get": "GET /class-shifts/:id",
+        "create": null,
+        "update": "PUT /class-shifts/:id",
+        "remove": "DELETE /class-shifts/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/class-shifts/:classId",
+          "handler": "create",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateClassShiftDto"
+        },
+        {
+          "method": "GET",
+          "path": "/class-shifts/find-by-class/:classId",
+          "handler": "findByClassId",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/class-teachers",
+      "name": "Giáo viên của lớp",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /class-teachers/",
+        "get": null,
+        "create": "POST /class-teachers/",
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/class-teachers/:classId/:classShiftId/:staffId",
+          "handler": "findById",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-teachers/class/by-teacher",
+          "handler": "searchClassByTeacher",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "order"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/class-teachers/verify-session-time",
+          "handler": "verifySessionTime",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "ClassStaffDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/class-users",
+      "name": "Học viên trong lớp",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /class-users/",
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/class-users/:classId",
+          "handler": "create",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateClassUserDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/class-users/:classId/:userId",
+          "handler": "delete",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/:classId/:userId",
+          "handler": "findById",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/class-users/:classId/:userId",
+          "handler": "update",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateClassUserDto"
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/count-review",
+          "handler": "countReview",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "classId",
+            "classSessionId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/count/:classId",
+          "handler": "countClassUsersByClassId",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-by-class-id/:classId",
+          "handler": "findClassUserByClassId",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "search",
+            "statusList",
+            "order"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-by-class-session/:classSessionId",
+          "handler": "findByClassSession",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-by-condition",
+          "handler": "findByCondition",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "classId",
+            "classSessionId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-by-user/:userId",
+          "handler": "findByUser",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "statusList"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-exercise",
+          "handler": "findExercise",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "search",
+            "status",
+            "classSessionId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/class-users/find-review",
+          "handler": "findReview",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "classId",
+            "classSessionId"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/classes",
+      "name": "Lớp học",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /classes/",
+        "get": "GET /classes/:id",
+        "create": "POST /classes/",
+        "update": "PUT /classes/:id",
+        "remove": "DELETE /classes/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "PUT",
+          "path": "/classes/:id/update-status",
+          "handler": "updateStatus",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateStatusClassDto"
+        },
+        {
+          "method": "GET",
+          "path": "/classes/analytics",
+          "handler": "countClasses",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/export",
+          "handler": "export",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "keyword",
+            "statusList",
+            "courseIds"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/find-by-status",
+          "handler": "findAllByStatus",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [
+            "page",
+            "limit",
+            "status"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/find-class-exercise-by-status",
+          "handler": "findClassExerciseByStatus",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [
+            "status"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/find-session-exercise-sent",
+          "handler": "findSessionExercise",
+          "authorized": "[RefEnum.STAFF]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/for-placement",
+          "handler": "findForPlacement",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId",
+            "courseIds",
+            "keyword"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/classes/general-information/:id",
+          "handler": "getGeneralInformationById",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/classrooms",
+      "name": "Phòng học",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /classrooms/",
+        "get": "GET /classrooms/:id",
+        "create": "POST /classrooms/",
+        "update": "PUT /classrooms/:id",
+        "remove": "DELETE /classrooms/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/classrooms/available",
+          "handler": "findValidClassrooms",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "sessionTimeId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/classrooms/check-seat-number",
+          "handler": "checkSeatNumber",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "classroomId",
+            "classId"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/config",
+      "name": "Cấu hình",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /config/",
+        "get": "GET /config/:id",
+        "create": "POST /config/",
+        "update": null,
+        "remove": "DELETE /config/:id"
+      },
+      "otherRoutes": []
+    },
+    {
+      "prefix": "/contracts",
+      "name": "Hợp đồng",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /contracts/",
+        "get": "GET /contracts/:id",
+        "create": "POST /contracts/",
+        "update": "PUT /contracts/:id",
+        "remove": "DELETE /contracts/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/contracts/:id/cancel",
+          "handler": "cancel",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CancelContractDto"
+        },
+        {
+          "method": "POST",
+          "path": "/contracts/admin/expire-overdue",
+          "handler": "expireOverdue",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/contracts/export",
+          "handler": "export",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "order",
+            "search"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/contracts/users/:userId/calculate",
+          "handler": "calculateByUserId",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/contracts/users/calculate",
+          "handler": "calculate",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/contracts/users/find",
+          "handler": "findAllByUserLogin",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [
+            "page",
+            "limit",
+            "order"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/courses",
+      "name": "Khoá học",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /courses/",
+        "get": "GET /courses/:id",
+        "create": "POST /courses/",
+        "update": "PUT /courses/:id",
+        "remove": "DELETE /courses/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/courses/export",
+          "handler": "export",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "order",
+            "search"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/crm",
+      "name": "CRM: khách hàng, cơ hội, việc cần làm",
+      "module": "CUSTM",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/crm/appointments/",
+          "handler": "findAll",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "order",
+            "search",
+            "tab",
+            "type",
+            "staffId",
+            "from",
+            "to"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/appointments/",
+          "handler": "create",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateCrmAppointmentDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/appointments/:id",
+          "handler": "update",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateCrmAppointmentDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/appointments/:id/cancel",
+          "handler": "cancel",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/appointments/:id/complete",
+          "handler": "complete",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CompleteCrmAppointmentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/appointments/calendar",
+          "handler": "calendar",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "from",
+            "to"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/appointments/counts",
+          "handler": "counts",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/appointments/today",
+          "handler": "today",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "mine"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/automation/catalog",
+          "handler": "catalog",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/automation/rules",
+          "handler": "findAll",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/automation/rules",
+          "handler": "create",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateAutomationRuleDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/crm/automation/rules/:id",
+          "handler": "remove",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/automation/rules/:id",
+          "handler": "findById",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/automation/rules/:id",
+          "handler": "update",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateAutomationRuleDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/automation/rules/:id/run",
+          "handler": "run",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/automation/rules/:id/runs",
+          "handler": "runs",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/automation/rules/preview",
+          "handler": "",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/",
+          "handler": "findAll",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "order",
+            "search",
+            "status",
+            "sourceId",
+            "assignedStaffId",
+            "staleDays"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/customers/",
+          "handler": "create",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateCrmCustomerDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/crm/customers/:id",
+          "handler": "delete",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/:id",
+          "handler": "findById",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/customers/:id",
+          "handler": "update",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateCrmCustomerDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/:id/activities",
+          "handler": "activities",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "opportunityId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/customers/:id/activities",
+          "handler": "createActivity",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateCrmActivityDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/customers/:id/assign",
+          "handler": "assign",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "AssignCrmCustomerDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/customers/assign-bulk",
+          "handler": "assignBulk",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "AssignBulkCrmCustomerDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/export",
+          "handler": "export",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "order",
+            "search",
+            "status",
+            "sourceId",
+            "assignedStaffId",
+            "staleDays"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/customers/import",
+          "handler": "import",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/import-template",
+          "handler": "",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/customers/stats",
+          "handler": "stats",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/opportunities/",
+          "handler": "findAll",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "order",
+            "search",
+            "stage",
+            "sourceId",
+            "assignedStaffId",
+            "courseId",
+            "closeFrom",
+            "closeTo"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/opportunities/",
+          "handler": "create",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateCrmOpportunityDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/opportunities/:id",
+          "handler": "findById",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/opportunities/:id",
+          "handler": "update",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateCrmOpportunityDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/opportunities/:id/lose",
+          "handler": "lose",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "LoseCrmOpportunityDto"
+        },
+        {
+          "method": "PATCH",
+          "path": "/crm/opportunities/:id/stage",
+          "handler": "move",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "MoveCrmOpportunityDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/opportunities/:id/win",
+          "handler": "",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/opportunities/export",
+          "handler": "export",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "order",
+            "search",
+            "stage",
+            "sourceId",
+            "assignedStaffId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/opportunities/kanban",
+          "handler": "kanban",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "search",
+            "sourceId",
+            "assignedStaffId",
+            "courseId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/opportunities/stats",
+          "handler": "stats",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/sla-policies/",
+          "handler": "findAll",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "includeInactive"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/sla-policies/",
+          "handler": "create",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateCrmSlaPolicyDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/crm/sla-policies/:id",
+          "handler": "delete",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/sla-policies/:id",
+          "handler": "update",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateCrmSlaPolicyDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/sources/",
+          "handler": "findAll",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "includeInactive"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/sources/",
+          "handler": "create",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateCrmSourceDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/crm/sources/:id",
+          "handler": "delete",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/sources/:id",
+          "handler": "update",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateCrmSourceDto"
+        },
+        {
+          "method": "GET",
+          "path": "/crm/tasks/",
+          "handler": "findAll",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "order",
+            "search",
+            "tab",
+            "priority",
+            "assigneeStaffId",
+            "mine",
+            "dueFrom",
+            "dueTo",
+            "userId",
+            "classId",
+            "contractId",
+            "opportunityId",
+            "customerId",
+            "supportId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/tasks/",
+          "handler": "create",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateCrmTaskDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/crm/tasks/:id",
+          "handler": "delete",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/crm/tasks/:id",
+          "handler": "update",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateCrmTaskDto"
+        },
+        {
+          "method": "POST",
+          "path": "/crm/tasks/:id/cancel",
+          "handler": "cancel",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/crm/tasks/:id/done",
+          "handler": "done",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/tasks/counts",
+          "handler": "counts",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "mine"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/crm/tasks/my-summary",
+          "handler": "mySummary",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "limit"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/dashboard",
+      "name": "Bảng điều khiển",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/dashboard/overview",
+          "handler": "overview",
+          "authorized": "[RefEnum.STAFF]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/districts",
+      "name": "Quận/huyện",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /districts/",
+        "get": null,
+        "create": "POST /districts/",
+        "update": null,
+        "remove": "DELETE /districts/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/districts/find-by-province/:provinceId",
+          "handler": "findByProvinceId",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/document-reminders",
+      "name": "Nhắc nộp hồ sơ",
+      "module": "SDOCS",
+      "crud": {
+        "list": "GET /document-reminders/",
+        "get": null,
+        "create": "POST /document-reminders/",
+        "update": "PUT /document-reminders/:id",
+        "remove": "DELETE /document-reminders/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/document-reminders/config",
+          "handler": "getConfig",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/document-reminders/config",
+          "handler": "updateConfig",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateDocumentReminderConfigDto"
+        },
+        {
+          "method": "GET",
+          "path": "/document-reminders/overview",
+          "handler": "overview",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/document-reminders/remind-now",
+          "handler": "remindNow",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/document-reminders/run-sweep",
+          "handler": "runSweep",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/document-types",
+      "name": "Loại giấy tờ",
+      "module": "SDOCS",
+      "crud": {
+        "list": "GET /document-types/",
+        "get": "GET /document-types/:id",
+        "create": "POST /document-types/",
+        "update": "PUT /document-types/:id",
+        "remove": "DELETE /document-types/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "PUT",
+          "path": "/document-types/reorder",
+          "handler": "reorder",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "ReorderDocumentTypesDto"
+        },
+        {
+          "method": "POST",
+          "path": "/document-types/seed-defaults",
+          "handler": "seedDefaults",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/exercise-comments",
+      "name": "Bình luận bài tập",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /exercise-comments/",
+        "get": "GET /exercise-comments/:id",
+        "create": null,
+        "update": "PUT /exercise-comments/:id",
+        "remove": "DELETE /exercise-comments/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/exercise-comments/create-comment/:exerciseReportId",
+          "handler": "create",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "CommentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/exercise-comments/find-by-exercise-report-id/:exerciseReportId",
+          "handler": "findByExerciseReportId",
+          "authorized": "",
+          "queryParams": [
+            "page",
+            "limit"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/files",
+      "name": "Tệp",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/files/abort-multipart-upload",
+          "handler": "abortMultipartUpload",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "AbortMultipartUploadDto"
+        },
+        {
+          "method": "POST",
+          "path": "/files/complete-multipart-upload",
+          "handler": "completeMultipartUpload",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "CompleteMultipartUploadDto"
+        },
+        {
+          "method": "POST",
+          "path": "/files/confirm-upload",
+          "handler": "confirmUpload",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "ConfirmUploadDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/files/multiple",
+          "handler": "deleteMultiple",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "ids"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/files/presign-multipart-upload",
+          "handler": "presignMultipartUpload",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "PresignMultipartUploadDto"
+        },
+        {
+          "method": "POST",
+          "path": "/files/presign-upload",
+          "handler": "presignUpload",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "PresignUploadDto"
+        },
+        {
+          "method": "POST",
+          "path": "/files/upload",
+          "handler": "upload",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/functions",
+      "name": "Chức năng",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/functions/find-all",
+          "handler": "findAll",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/health",
+      "name": "Kiểm tra sống",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /health",
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/health/live",
+          "handler": "live",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/health/ready",
+          "handler": "ready",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/holidays",
+      "name": "Ngày nghỉ",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /holidays/",
+        "get": "GET /holidays/:id",
+        "create": "POST /holidays/",
+        "update": "PUT /holidays/:id",
+        "remove": "DELETE /holidays/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/holidays/check/:date",
+          "handler": "checkHoliday",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/holidays/year/:year",
+          "handler": "getByYear",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/lessons",
+      "name": "Bài học",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /lessons/",
+        "get": "GET /lessons/:id",
+        "create": "POST /lessons/",
+        "update": "PUT /lessons/:id",
+        "remove": "DELETE /lessons/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/lessons/course/:courseId",
+          "handler": "findByCourseId",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/lessons/course/:courseId/lesson/:lessonNumber",
+          "handler": "findByLessonNumber",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/lessons/course/:courseId/lesson/:lessonNumber",
+          "handler": "upsertByLessonNumber",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateLessonDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/makeup",
+      "name": "Dạy bù / bổ trợ",
+      "module": "MKEUP",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/makeup/needs",
+          "handler": "findNeeds",
+          "authorized": "MAKEUP_ROLES",
+          "queryParams": [
+            "page",
+            "limit",
+            "order",
+            "search",
+            "centerId",
+            "status"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/makeup/needs",
+          "handler": "createNeed",
+          "authorized": "MAKEUP_ROLES",
+          "queryParams": [],
+          "bodyDto": "CreateMakeupNeedDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/makeup/needs/:id",
+          "handler": "deleteNeed",
+          "authorized": "MAKEUP_ROLES",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/makeup/needs/:id/decline",
+          "handler": "declineNeed",
+          "authorized": "MAKEUP_ROLES",
+          "queryParams": [],
+          "bodyDto": "DeclineMakeupNeedDto"
+        },
+        {
+          "method": "GET",
+          "path": "/makeup/sessions",
+          "handler": "findSessions",
+          "authorized": "MAKEUP_ROLES",
+          "queryParams": [
+            "page",
+            "limit",
+            "order",
+            "centerId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/makeup/sessions",
+          "handler": "createSession",
+          "authorized": "MAKEUP_ROLES",
+          "queryParams": [],
+          "bodyDto": "CreateMakeupSessionDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/makeup/sessions/:id",
+          "handler": "cancelSession",
+          "authorized": "MAKEUP_ROLES",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/makeup/sessions/:id/confirm",
+          "handler": "confirmSession",
+          "authorized": "MAKEUP_ROLES",
+          "queryParams": [],
+          "bodyDto": "ConfirmMakeupSessionDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/modules",
+      "name": "Module",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/modules/find-all",
+          "handler": "findAll",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/modules/find-with-role/:roleId",
+          "handler": "findWithRole",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/notifications",
+      "name": "Thông báo",
+      "module": "NOTIF",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/notifications/find-by-user",
+          "handler": "findByUserLogin",
+          "authorized": "",
+          "queryParams": [
+            "page",
+            "limit"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/notifications/read-all",
+          "handler": "readAll",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/notifications/read/:id",
+          "handler": "read",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/notifications/unread-count",
+          "handler": "unreadCount",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/orders",
+      "name": "Đơn hàng",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": "POST /orders/",
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/orders/:orderCode",
+          "handler": "tienDo",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/parents",
+      "name": "Phụ huynh",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /parents/",
+        "get": "GET /parents/:id",
+        "create": "POST /parents/",
+        "update": null,
+        "remove": "DELETE /parents/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/parents/find-by-phone/:phone",
+          "handler": "findByPhone",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/payment-appointment",
+      "name": "Hẹn thanh toán",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": "POST /payment-appointment/",
+        "update": "PUT /payment-appointment/:id",
+        "remove": "DELETE /payment-appointment/:id"
+      },
+      "otherRoutes": []
+    },
+    {
+      "prefix": "/permissions",
+      "name": "Quyền",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/permissions/find-all",
+          "handler": "findAll",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/post-attachments",
+      "name": "Tệp đính kèm bài viết",
+      "module": "POSTS",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": "POST /post-attachments/",
+        "update": null,
+        "remove": "DELETE /post-attachments/:id"
+      },
+      "otherRoutes": []
+    },
+    {
+      "prefix": "/post-comments",
+      "name": "Bình luận bài viết",
+      "module": "POSTS",
+      "crud": {
+        "list": "GET /post-comments/",
+        "get": "GET /post-comments/:id",
+        "create": null,
+        "update": "PUT /post-comments/:id",
+        "remove": "DELETE /post-comments/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/post-comments/create-comment/:postId",
+          "handler": "create",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "CommentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/post-comments/find-by-post/:postId",
+          "handler": "getByPostId",
+          "authorized": "",
+          "queryParams": [
+            "page",
+            "limit"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/post-reaction",
+      "name": "Cảm xúc bài viết",
+      "module": "POSTS",
+      "crud": {
+        "list": "GET /post-reaction/",
+        "get": "GET /post-reaction/:id",
+        "create": null,
+        "update": null,
+        "remove": "DELETE /post-reaction/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/post-reaction/create-post-reaction/:postId",
+          "handler": "create",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "CreatePostReactionDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/posts",
+      "name": "Bài viết / bảng tin",
+      "module": "POSTS",
+      "crud": {
+        "list": "GET /posts/",
+        "get": "GET /posts/:id",
+        "create": "POST /posts/",
+        "update": "PUT /posts/:id",
+        "remove": "DELETE /posts/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/posts/all-post",
+          "handler": "getAllPost",
+          "authorized": "",
+          "queryParams": [
+            "page",
+            "limit",
+            "type",
+            "important"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/posts/analytics",
+          "handler": "countStatus",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "search"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/posts/detail/:id",
+          "handler": "detail",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/posts/find-by-class-id",
+          "handler": "findByClassId",
+          "authorized": "",
+          "queryParams": [
+            "page",
+            "limit",
+            "classId",
+            "type"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/posts/news",
+          "handler": "createNews",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateNewsDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/posts/news/:id",
+          "handler": "updateNews",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateNewsDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/provinces",
+      "name": "Tỉnh/thành",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /provinces/",
+        "get": null,
+        "create": "POST /provinces/",
+        "update": null,
+        "remove": "DELETE /provinces/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/provinces/find-all",
+          "handler": "findAll",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/receipts",
+      "name": "Biên lai học phí",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /receipts/",
+        "get": "GET /receipts/:id",
+        "create": "POST /receipts/",
+        "update": "PUT /receipts/:id",
+        "remove": "DELETE /receipts/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "PUT",
+          "path": "/receipts/accept/:id",
+          "handler": "accept",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "AcceptReceiptDto"
+        },
+        {
+          "method": "GET",
+          "path": "/receipts/find-by-contract/:contractId",
+          "handler": "findByContract",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/reports",
+      "name": "Báo cáo tổng hợp",
+      "module": "REPRT",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/reports/classes",
+          "handler": "classes",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "order"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/reports/classes/:classId",
+          "handler": "classDetail",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/reports/overview",
+          "handler": "overview",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/reports/settings",
+          "handler": "settings",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/reports/settings",
+          "handler": "updateSettings",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateReportSettingsDto"
+        },
+        {
+          "method": "GET",
+          "path": "/reports/students",
+          "handler": "students",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "riskLevel",
+            "order"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/reports/students/:userId",
+          "handler": "studentDetail",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/reservations",
+      "name": "Bảo lưu",
+      "module": "RESRV",
+      "crud": {
+        "list": "GET /reservations/",
+        "get": "GET /reservations/:id",
+        "create": "POST /reservations/",
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/reservations/:id/approve",
+          "handler": "approve",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/reservations/:id/cancel",
+          "handler": "cancel",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/reservations/:id/reject",
+          "handler": "reject",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "RejectReservationDto"
+        },
+        {
+          "method": "POST",
+          "path": "/reservations/:id/resume",
+          "handler": "resume",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "ResumeReservationDto"
+        },
+        {
+          "method": "GET",
+          "path": "/reservations/find-by-user",
+          "handler": "findByUser",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/reservations/request",
+          "handler": "createRequest",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": "CreateReservationRequestDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/role-modules",
+      "name": "Quyền theo module",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/role-modules/create-or-update/:roleId",
+          "handler": "create",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateRoleModulesDto"
+        },
+        {
+          "method": "GET",
+          "path": "/role-modules/find-by-role/:roleId",
+          "handler": "findByRoleId",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/roles",
+      "name": "Chức danh",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /roles/",
+        "get": "GET /roles/:id",
+        "create": "POST /roles/",
+        "update": "PUT /roles/:id",
+        "remove": "DELETE /roles/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/roles/find-all",
+          "handler": "findAll",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/schedule",
+      "name": "Thời khoá biểu",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/schedule/availability",
+          "handler": "availability",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/calendar",
+          "handler": "calendar",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/me/calendar",
+          "handler": "myCalendar",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/me/weekly",
+          "handler": "myWeekly",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/teacher-grid",
+          "handler": "teacherGrid",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/time-slots/",
+          "handler": "list",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/schedule/time-slots/",
+          "handler": "create",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "CreateScheduleTimeSlotDto"
+        },
+        {
+          "method": "DELETE",
+          "path": "/schedule/time-slots/:id",
+          "handler": "delete",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/time-slots/:id",
+          "handler": "findById",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/schedule/time-slots/:id",
+          "handler": "update",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateScheduleTimeSlotDto"
+        },
+        {
+          "method": "GET",
+          "path": "/schedule/weekly",
+          "handler": "weekly",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/session-exercise-attachments",
+      "name": "Tệp bài tập",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /session-exercise-attachments/",
+        "get": "GET /session-exercise-attachments/:id",
+        "create": "POST /session-exercise-attachments/",
+        "update": null,
+        "remove": "DELETE /session-exercise-attachments/:id"
+      },
+      "otherRoutes": []
+    },
+    {
+      "prefix": "/session-exercise-report",
+      "name": "Báo cáo bài tập",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /session-exercise-report/",
+        "get": "GET /session-exercise-report/:id",
+        "create": "POST /session-exercise-report/",
+        "update": "PUT /session-exercise-report/:id",
+        "remove": "DELETE /session-exercise-report/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/session-exercise-report/analytics",
+          "handler": "countByClassSessionId",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "classSessionId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/session-exercise-report/take-score/:id",
+          "handler": "takeScore",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "ExerciseReportDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/session-exercise-report-attachments",
+      "name": "Tệp báo cáo bài tập",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /session-exercise-report-attachments/",
+        "get": "GET /session-exercise-report-attachments/:id",
+        "create": "POST /session-exercise-report-attachments/",
+        "update": null,
+        "remove": "DELETE /session-exercise-report-attachments/:id"
+      },
+      "otherRoutes": []
+    },
+    {
+      "prefix": "/session-exercises",
+      "name": "Bài tập buổi học",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /session-exercises/",
+        "get": "GET /session-exercises/:id",
+        "create": "POST /session-exercises/",
+        "update": null,
+        "remove": "DELETE /session-exercises/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/session-exercises/find-by-class-session/:classSessionId",
+          "handler": "findByClassSessionId",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/session-packages",
+      "name": "Gói buổi học",
+      "module": "CTRCT",
+      "crud": {
+        "list": "GET /session-packages/",
+        "get": "GET /session-packages/:id",
+        "create": "POST /session-packages/",
+        "update": "PUT /session-packages/:id",
+        "remove": "DELETE /session-packages/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/session-packages/add-sessions",
+          "handler": "addSessions",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "AddSessionsDto"
+        },
+        {
+          "method": "POST",
+          "path": "/session-packages/adjust",
+          "handler": "adjustSessions",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "AdjustSessionsDto"
+        },
+        {
+          "method": "POST",
+          "path": "/session-packages/admin/notify-near-depletion",
+          "handler": "notifyNearDepletion",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [
+            "thresholdDays"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/balance/:userId",
+          "handler": "getBalance",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/session-packages/batch-balance",
+          "handler": "getBatchBalance",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/session-packages/check-expired",
+          "handler": "checkExpired",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/session-packages/deduct-session",
+          "handler": "deductSession",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "DeductSessionDto"
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/forecast/:userId",
+          "handler": "forecast",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId",
+            "bufferDays"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/low-balance",
+          "handler": "getUsersWithLowBalance",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "threshold",
+            "centerId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/transactions/:userId",
+          "handler": "getTransactionHistory",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId",
+            "page",
+            "limit"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/session-packages/user/:userId",
+          "handler": "findByUserId",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/session-review",
+      "name": "Nhận xét buổi học",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /session-review/",
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": "DELETE /session-review/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "PUT",
+          "path": "/session-review/:userId/:classSessionId",
+          "handler": "update",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateSessionReviewDto"
+        },
+        {
+          "method": "POST",
+          "path": "/session-review/multiple",
+          "handler": "createOrUpdate",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "classSessionId"
+          ],
+          "bodyDto": "CreateSessionReviewDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/session-review-criteria",
+      "name": "Tiêu chí nhận xét",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /session-review-criteria/",
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": []
+    },
+    {
+      "prefix": "/session-times",
+      "name": "Khung giờ học",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /session-times/",
+        "get": "GET /session-times/:id",
+        "create": "POST /session-times/",
+        "update": "PUT /session-times/:id",
+        "remove": "DELETE /session-times/:id"
+      },
+      "otherRoutes": []
+    },
+    {
+      "prefix": "/settings",
+      "name": "Cài đặt",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /settings/",
+        "get": "GET /settings/:id",
+        "create": "POST /settings/",
+        "update": null,
+        "remove": "DELETE /settings/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/settings/get-by-user",
+          "handler": "getByUserId",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/setup",
+      "name": "Thiết lập lần đầu",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/setup/admin",
+          "handler": "createAdmin",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "SetupAdminDto"
+        },
+        {
+          "method": "POST",
+          "path": "/setup/branding",
+          "handler": "saveBranding",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "SetupBrandingDto"
+        },
+        {
+          "method": "POST",
+          "path": "/setup/branding/logo",
+          "handler": "uploadLogo",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/setup/complete",
+          "handler": "complete",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/setup/import",
+          "handler": "importData",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "dryRun",
+            "teacherPassword",
+            "generateSessions"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/setup/status",
+          "handler": "status",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/setup/template",
+          "handler": "template",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/site",
+      "name": "Admin tổng",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/site/admins",
+          "handler": "listAdmins",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/site/admins",
+          "handler": "addAdmin",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "DELETE",
+          "path": "/site/admins/:email",
+          "handler": "removeAdmin",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/site/branding",
+          "handler": "getBranding",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/site/branding",
+          "handler": "setBranding",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/site/login",
+          "handler": "login",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/site/me",
+          "handler": "me",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/site/modules",
+          "handler": "listModules",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/site/modules/:code",
+          "handler": "setModule",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/site/orders",
+          "handler": "danhSach",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "DELETE",
+          "path": "/site/orders/:code",
+          "handler": "huy",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/site/orders/:code",
+          "handler": "motDon",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/site/orders/:code/dung-lai",
+          "handler": "dungLai",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/site/orders/:code/gui-thu",
+          "handler": "guiThu",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/site/orders/:code/tien-do",
+          "handler": "ghiTienDo",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "TienDoInput"
+        },
+        {
+          "method": "GET",
+          "path": "/site/plugins",
+          "handler": "plugins",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/site/plugins/:code",
+          "handler": "suaPlugin",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "PluginUpdate"
+        },
+        {
+          "method": "GET",
+          "path": "/site/public/tenant/:code",
+          "handler": "resolveTenant",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/site/register",
+          "handler": "register",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "TenantDeclaration"
+        },
+        {
+          "method": "GET",
+          "path": "/site/tenants",
+          "handler": "listTenants",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/site/tenants",
+          "handler": "addTenant",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "TenantDeclaration"
+        },
+        {
+          "method": "DELETE",
+          "path": "/site/tenants/:code",
+          "handler": "removeTenant",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/site/tenants/:code",
+          "handler": "updateTenant",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "TenantDeclaration"
+        },
+        {
+          "method": "GET",
+          "path": "/site/tenants/:code/branding",
+          "handler": "tenantBranding",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/site/tenants/:code/branding",
+          "handler": "setTenantBranding",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/site/tenants/:code/modules",
+          "handler": "tenantModules",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/site/tenants/:code/modules/:module",
+          "handler": "setTenantModule",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/staffs",
+      "name": "Nhân sự",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /staffs/",
+        "get": "GET /staffs/:id",
+        "create": "POST /staffs/",
+        "update": "PUT /staffs/:id",
+        "remove": "DELETE /staffs/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "PUT",
+          "path": "/staffs/",
+          "handler": "updateUserLogin",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateStaffDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/staffs/change-password",
+          "handler": "changePassword",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "ChangePasswordDto"
+        },
+        {
+          "method": "GET",
+          "path": "/staffs/export",
+          "handler": "exportOrderDataToExcel",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "order",
+            "search"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/staffs/get-by-email",
+          "handler": "getByEmail",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "EmailStaffDto"
+        },
+        {
+          "method": "POST",
+          "path": "/staffs/import",
+          "handler": "importFromExcel",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerIds"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/staffs/import/template",
+          "handler": "getImportTemplate",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/staffs/lock/:id",
+          "handler": "lock",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "LockStaffDto"
+        },
+        {
+          "method": "GET",
+          "path": "/staffs/profile",
+          "handler": "profile",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/staffs/reset-password/:id",
+          "handler": "resetPassword",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/staffs/teacher",
+          "handler": "createTeacher",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "NewStaffDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/student-documents",
+      "name": "Hồ sơ học viên",
+      "module": "SDOCS",
+      "crud": {
+        "list": null,
+        "get": "GET /student-documents/:id",
+        "create": null,
+        "update": null,
+        "remove": "DELETE /student-documents/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "PUT",
+          "path": "/student-documents/:id/review",
+          "handler": "review",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "ReviewStudentDocumentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/student-documents/me",
+          "handler": "myChecklist",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/student-documents/me",
+          "handler": "upsertMine",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": "UpsertStudentDocumentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/student-documents/students",
+          "handler": "listStudents",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "centerId",
+            "search",
+            "assigneeStaffId",
+            "onlyIncomplete"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/student-documents/students/:userId",
+          "handler": "checklist",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/student-documents/students/:userId",
+          "handler": "upsert",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpsertStudentDocumentDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/student-documents/students/:userId/profile",
+          "handler": "updateProfile",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateStudentProfileDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/support",
+      "name": "Phiếu hỗ trợ",
+      "module": "SPPRT",
+      "crud": {
+        "list": "GET /support/",
+        "get": "GET /support/:id",
+        "create": "POST /support/",
+        "update": "PUT /support/:id",
+        "remove": "DELETE /support/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/support/:id/archive",
+          "handler": "archive",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/support/:id/escalate",
+          "handler": "escalate",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "EscalateSupportDto"
+        },
+        {
+          "method": "POST",
+          "path": "/support/:id/reopen",
+          "handler": "reopen",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "ReopenSupportDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/support/:id/sla",
+          "handler": "updateSla",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateSupportSlaDto"
+        },
+        {
+          "method": "GET",
+          "path": "/support/counts",
+          "handler": "counts",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/support/find-by-user/",
+          "handler": "findByUser",
+          "authorized": "",
+          "queryParams": [
+            "page",
+            "limit"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/support/handle-support/:id",
+          "handler": "handleSupport",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "HandleSupportsDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/support-comments",
+      "name": "Bình luận hỗ trợ",
+      "module": "SPPRT",
+      "crud": {
+        "list": "GET /support-comments/",
+        "get": "GET /support-comments/:id",
+        "create": null,
+        "update": "PUT /support-comments/:id",
+        "remove": "DELETE /support-comments/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/support-comments/create-comment/:supportId",
+          "handler": "create",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": "CommentDto"
+        },
+        {
+          "method": "GET",
+          "path": "/support-comments/find-by-support-id/:supportId",
+          "handler": "findByAbsenceRequestId",
+          "authorized": "",
+          "queryParams": [
+            "page",
+            "limit"
+          ],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/trial",
+      "name": "Đăng ký dùng thử",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "POST",
+          "path": "/trial/signup",
+          "handler": "signup",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "TrialSignupDto"
+        },
+        {
+          "method": "POST",
+          "path": "/trial/signup-google",
+          "handler": "signupGoogle",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": "TrialGoogleSignupDto"
+        },
+        {
+          "method": "GET",
+          "path": "/trial/status",
+          "handler": "status",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/user-preparations",
+      "name": "Chuẩn bị đầu vào",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /user-preparations/",
+        "get": "GET /user-preparations/:id",
+        "create": "POST /user-preparations/",
+        "update": "PUT /user-preparations/:id",
+        "remove": "DELETE /user-preparations/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "PUT",
+          "path": "/user-preparations/cancel/:id",
+          "handler": "cancel",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/user-preparations/export",
+          "handler": "export",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "order",
+            "search"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/user-preparations/handle/:id",
+          "handler": "handleUserPreparation",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "HandleUserPreparationDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/user-preparations/processed/:id",
+          "handler": "processed",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/user-sessions",
+      "name": "Buổi học của học viên",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/user-sessions/:classId/:classSessionId",
+          "handler": "findById",
+          "authorized": "",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/user-sessions/:userId/:classSessionId",
+          "handler": "update",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateUserSessionDto"
+        },
+        {
+          "method": "GET",
+          "path": "/user-sessions/find-by-user/:userId/:classSessionId",
+          "handler": "findByUserIdAndClassSessionId",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/user-sessions/find/:classSessionId",
+          "handler": "findUserSessionByUserLogin",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/user-sessions/multiple",
+          "handler": "createOrUpdate",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "classSessionId"
+          ],
+          "bodyDto": "CreateUserSessionDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/users",
+      "name": "Học viên",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /users/",
+        "get": "GET /users/:id",
+        "create": "POST /users/",
+        "update": "PUT /users/:id",
+        "remove": "DELETE /users/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "PUT",
+          "path": "/users/",
+          "handler": "update",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": "UpdateUserDto"
+        },
+        {
+          "method": "PUT",
+          "path": "/users/:id/card-code",
+          "handler": "assignCardCode",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "AssignCardCodeDto"
+        },
+        {
+          "method": "GET",
+          "path": "/users/accounts",
+          "handler": "accounts",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/users/export",
+          "handler": "exportOrderDataToExcel",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "order",
+            "search"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/users/import",
+          "handler": "importFromExcel",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "centerId"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/users/import/template",
+          "handler": "getImportTemplate",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/users/profile",
+          "handler": "profile",
+          "authorized": "[RefEnum.USER]",
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/version",
+      "name": "Phiên bản",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /version",
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": []
+    },
+    {
+      "prefix": "/wards",
+      "name": "Phường/xã",
+      "module": "lõi",
+      "crud": {
+        "list": "GET /wards/",
+        "get": null,
+        "create": "POST /wards/",
+        "update": null,
+        "remove": "DELETE /wards/:id"
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/wards/find-by-district/:districtId",
+          "handler": "findByProvinceId",
+          "authorized": null,
+          "queryParams": [],
+          "bodyDto": null
+        }
+      ]
+    },
+    {
+      "prefix": "/zalo",
+      "name": "Zalo",
+      "module": "lõi",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/zalo/auth/callback",
+          "handler": "authCallback",
+          "authorized": null,
+          "queryParams": [
+            "code",
+            "state",
+            "oa_id"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/zalo/auth/refresh",
+          "handler": "forceRefresh",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/zalo/auth/status",
+          "handler": "getStatus",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/zalo/auth/url",
+          "handler": "getAuthUrl",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [
+            "returnUrl"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/zalo/config",
+          "handler": "getConfig",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/zalo/config",
+          "handler": "setConfig",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "SetZaloConfigDto"
+        }
+      ]
+    },
+    {
+      "prefix": "/zoom",
+      "name": "Lớp học online Zoom",
+      "module": "ZOOMC",
+      "crud": {
+        "list": null,
+        "get": null,
+        "create": null,
+        "update": null,
+        "remove": null
+      },
+      "otherRoutes": [
+        {
+          "method": "GET",
+          "path": "/zoom/classes",
+          "handler": "listOnlineClasses",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [
+            "page",
+            "limit",
+            "centerId",
+            "search",
+            "status"
+          ],
+          "bodyDto": null
+        },
+        {
+          "method": "DELETE",
+          "path": "/zoom/classes/:classId/meeting",
+          "handler": "deleteMeeting",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/zoom/classes/:classId/meeting",
+          "handler": "getMeeting",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "POST",
+          "path": "/zoom/classes/:classId/meeting",
+          "handler": "createMeeting",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/zoom/classes/:classId/meeting/regenerate",
+          "handler": "regenerateMeeting",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/zoom/classes/:classId/sessions",
+          "handler": "listSessions",
+          "authorized": "[RefEnum.STAFF, RefEnum.USER, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/zoom/classes/:classId/start-url",
+          "handler": "getStartUrl",
+          "authorized": "[RefEnum.STAFF, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/zoom/join/:classSessionId",
+          "handler": "join",
+          "authorized": "[RefEnum.STAFF, RefEnum.USER, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/zoom/join/:classSessionId/status",
+          "handler": "joinStatus",
+          "authorized": "[RefEnum.STAFF, RefEnum.USER, RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "GET",
+          "path": "/zoom/settings",
+          "handler": "getSettings",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": null
+        },
+        {
+          "method": "PUT",
+          "path": "/zoom/settings",
+          "handler": "updateSettings",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "UpdateZoomSettingsDto"
+        },
+        {
+          "method": "POST",
+          "path": "/zoom/settings/test",
+          "handler": "testConnection",
+          "authorized": "[RefEnum.ADMIN]",
+          "queryParams": [],
+          "bodyDto": "TestZoomConnectionDto"
+        }
+      ]
+    }
+  ]
+}

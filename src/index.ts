@@ -8,58 +8,58 @@
  *      4.6 (knb / peptalk), dù `.d.ts` của SDK đòi TS ≥4.9.
  *   2. Kiểm được bằng test gọi hàm thẳng, không cần dựng transport.
  * SDK chỉ xuất hiện ở TẦNG NỐI (adapter) của mỗi host — tuyến `/mcp` trong máy chủ, hoặc bộ nối
- * stdio ở `src/bo-noi` — nơi SDK nằm ở `peerDependencies`. Đừng kéo SDK vào cây `src/loi`,`src/quet`.
+ * stdio ở `src/stdio` — nơi SDK nằm ở `peerDependencies`. Đừng kéo SDK vào cây `src/core`,`src/scanner`.
  *
- * Cách dùng: host gọi `datCauHinh(cfg)` MỘT LẦN lúc khởi động, sau đó `dinhNghiaCongCu()` /
- * `chayCongCu()` phục vụ giao thức. Xem `src/bo-noi/server.ts` làm mẫu.
+ * Cách dùng: host gọi `setConfig(cfg)` MỘT LẦN lúc khởi động, sau đó `defineTools()` /
+ * `runTool()` phục vụ giao thức. Xem `src/stdio/server.ts` làm mẫu.
  */
 
-export { datCauHinh, cauHinh, quenCauHinh } from './cau-hinh';
-export type { CauHinhThuongHieu } from './cau-hinh';
+export { setConfig, getConfig, resetConfig } from './config';
+export type { BrandConfig } from './config';
 
-// Vá crypto cho Node 18 — host gọi trước khi dựng transport của SDK. Xem `nen-tang.ts`.
-export { vaCrypto } from './nen-tang';
+// Vá crypto cho Node 18 — host gọi trước khi dựng transport của SDK. Xem `platform.ts`.
+export { patchCrypto } from './platform';
 
 // Lõi công cụ: khai + chạy.
-export { dinhNghiaCongCu, chayCongCu } from './loi/cong-cu';
-export type { DinhNghiaCongCu, LocKhaiCongCu } from './loi/cong-cu';
+export { defineTools, runTool } from './core/tools';
+export type { ToolDefinition, ToolListFilter } from './core/tools';
 
 // Danh mục + tra cứu tuyến.
 export {
-  napDanhMuc,
-  chuanHoaNhom,
-  timNhom,
-  vieclamDuoc,
-  tuyenCuaViec,
-  moiTuyen,
-  moiTuyenCuaNhom,
-  TEN_VIEC,
-  VIEC_TU_TEN,
-} from './loi/danh-muc';
+  loadCatalog,
+  normalizeGroup,
+  findGroup,
+  availableActions,
+  routeForAction,
+  allRoutes,
+  routesOfGroup,
+  ACTION_NAMES,
+  ACTION_FROM_NAME,
+} from './core/catalog';
 
 // Mảng nghiệp vụ.
-export { moiMang, mangCuaNhom, timMang } from './loi/mang';
+export { allDomains, domainOfGroup, findDomain } from './core/domains';
 
 // Phiên + khoá.
-export { phienTuMoiTruong, diaChiGoiCua, dauKhoa, khoaBatBuoc } from './loi/phien';
-export type { Phien } from './loi/phien';
+export { sessionFromEnv, callBaseUrlOf, keyPrefixOf, requireApiKey } from './core/session';
+export type { Session } from './core/session';
 
 // Bản triển khai.
-export { nhanDienBan, banHienTai } from './loi/ban';
-export type { Ban } from './loi/ban';
+export { identifyDeployment, currentDeployment } from './core/deployment';
+export type { Deployment } from './core/deployment';
 
 // Gọi HTTP + dịch lỗi.
-export { goiApi, dichLoi } from './loi/http';
-export type { KetQuaGoi, ThamSoGoi } from './loi/http';
+export { callApi, translateError } from './core/http';
+export type { CallResult, CallParams } from './core/http';
 
 // Đóng gói kết quả (gắn tên bản, ẩn khoá).
-export { ketQua, ketQuaLoi, xoaKhoa, dongBan } from './loi/ket-qua';
+export { formatResult, formatError, redactKey, deploymentLine } from './core/result';
 
 // Lỗi phân loại.
-export { LoiNguoiDung, LoiCauHinh } from './loi/loi';
+export { UserError, ConfigError } from './core/errors';
 
 // Scanner: sinh danh mục từ mã nguồn máy chủ.
-export { quetKho, quetTep, timTepController, xepCrud, docBanKeModule } from './quet/quet-nguon';
+export { scanRepo, scanFile, findControllerFiles, classifyCrud, readModuleManifests } from './scanner/scan-source';
 
 // Kiểu dữ liệu.
-export type { DanhMuc, Nhom, Tuyen, Crud, TenViec, Mang } from './loi/kieu';
+export type { Catalog, Group, Route, Crud, CrudAction, Domain } from './core/types';

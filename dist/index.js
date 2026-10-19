@@ -9,69 +9,69 @@
  *      4.6 (knb / peptalk), dù `.d.ts` của SDK đòi TS ≥4.9.
  *   2. Kiểm được bằng test gọi hàm thẳng, không cần dựng transport.
  * SDK chỉ xuất hiện ở TẦNG NỐI (adapter) của mỗi host — tuyến `/mcp` trong máy chủ, hoặc bộ nối
- * stdio ở `src/bo-noi` — nơi SDK nằm ở `peerDependencies`. Đừng kéo SDK vào cây `src/loi`,`src/quet`.
+ * stdio ở `src/stdio` — nơi SDK nằm ở `peerDependencies`. Đừng kéo SDK vào cây `src/core`,`src/scanner`.
  *
- * Cách dùng: host gọi `datCauHinh(cfg)` MỘT LẦN lúc khởi động, sau đó `dinhNghiaCongCu()` /
- * `chayCongCu()` phục vụ giao thức. Xem `src/bo-noi/server.ts` làm mẫu.
+ * Cách dùng: host gọi `setConfig(cfg)` MỘT LẦN lúc khởi động, sau đó `defineTools()` /
+ * `runTool()` phục vụ giao thức. Xem `src/stdio/server.ts` làm mẫu.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.docBanKeModule = exports.xepCrud = exports.timTepController = exports.quetTep = exports.quetKho = exports.LoiCauHinh = exports.LoiNguoiDung = exports.dongBan = exports.xoaKhoa = exports.ketQuaLoi = exports.ketQua = exports.dichLoi = exports.goiApi = exports.banHienTai = exports.nhanDienBan = exports.khoaBatBuoc = exports.dauKhoa = exports.diaChiGoiCua = exports.phienTuMoiTruong = exports.timMang = exports.mangCuaNhom = exports.moiMang = exports.VIEC_TU_TEN = exports.TEN_VIEC = exports.moiTuyenCuaNhom = exports.moiTuyen = exports.tuyenCuaViec = exports.vieclamDuoc = exports.timNhom = exports.chuanHoaNhom = exports.napDanhMuc = exports.chayCongCu = exports.dinhNghiaCongCu = exports.vaCrypto = exports.quenCauHinh = exports.cauHinh = exports.datCauHinh = void 0;
-var cau_hinh_1 = require("./cau-hinh");
-Object.defineProperty(exports, "datCauHinh", { enumerable: true, get: function () { return cau_hinh_1.datCauHinh; } });
-Object.defineProperty(exports, "cauHinh", { enumerable: true, get: function () { return cau_hinh_1.cauHinh; } });
-Object.defineProperty(exports, "quenCauHinh", { enumerable: true, get: function () { return cau_hinh_1.quenCauHinh; } });
-// Vá crypto cho Node 18 — host gọi trước khi dựng transport của SDK. Xem `nen-tang.ts`.
-var nen_tang_1 = require("./nen-tang");
-Object.defineProperty(exports, "vaCrypto", { enumerable: true, get: function () { return nen_tang_1.vaCrypto; } });
+exports.readModuleManifests = exports.classifyCrud = exports.findControllerFiles = exports.scanFile = exports.scanRepo = exports.ConfigError = exports.UserError = exports.deploymentLine = exports.redactKey = exports.formatError = exports.formatResult = exports.translateError = exports.callApi = exports.currentDeployment = exports.identifyDeployment = exports.requireApiKey = exports.keyPrefixOf = exports.callBaseUrlOf = exports.sessionFromEnv = exports.findDomain = exports.domainOfGroup = exports.allDomains = exports.ACTION_FROM_NAME = exports.ACTION_NAMES = exports.routesOfGroup = exports.allRoutes = exports.routeForAction = exports.availableActions = exports.findGroup = exports.normalizeGroup = exports.loadCatalog = exports.runTool = exports.defineTools = exports.patchCrypto = exports.resetConfig = exports.getConfig = exports.setConfig = void 0;
+var config_1 = require("./config");
+Object.defineProperty(exports, "setConfig", { enumerable: true, get: function () { return config_1.setConfig; } });
+Object.defineProperty(exports, "getConfig", { enumerable: true, get: function () { return config_1.getConfig; } });
+Object.defineProperty(exports, "resetConfig", { enumerable: true, get: function () { return config_1.resetConfig; } });
+// Vá crypto cho Node 18 — host gọi trước khi dựng transport của SDK. Xem `platform.ts`.
+var platform_1 = require("./platform");
+Object.defineProperty(exports, "patchCrypto", { enumerable: true, get: function () { return platform_1.patchCrypto; } });
 // Lõi công cụ: khai + chạy.
-var cong_cu_1 = require("./loi/cong-cu");
-Object.defineProperty(exports, "dinhNghiaCongCu", { enumerable: true, get: function () { return cong_cu_1.dinhNghiaCongCu; } });
-Object.defineProperty(exports, "chayCongCu", { enumerable: true, get: function () { return cong_cu_1.chayCongCu; } });
+var tools_1 = require("./core/tools");
+Object.defineProperty(exports, "defineTools", { enumerable: true, get: function () { return tools_1.defineTools; } });
+Object.defineProperty(exports, "runTool", { enumerable: true, get: function () { return tools_1.runTool; } });
 // Danh mục + tra cứu tuyến.
-var danh_muc_1 = require("./loi/danh-muc");
-Object.defineProperty(exports, "napDanhMuc", { enumerable: true, get: function () { return danh_muc_1.napDanhMuc; } });
-Object.defineProperty(exports, "chuanHoaNhom", { enumerable: true, get: function () { return danh_muc_1.chuanHoaNhom; } });
-Object.defineProperty(exports, "timNhom", { enumerable: true, get: function () { return danh_muc_1.timNhom; } });
-Object.defineProperty(exports, "vieclamDuoc", { enumerable: true, get: function () { return danh_muc_1.vieclamDuoc; } });
-Object.defineProperty(exports, "tuyenCuaViec", { enumerable: true, get: function () { return danh_muc_1.tuyenCuaViec; } });
-Object.defineProperty(exports, "moiTuyen", { enumerable: true, get: function () { return danh_muc_1.moiTuyen; } });
-Object.defineProperty(exports, "moiTuyenCuaNhom", { enumerable: true, get: function () { return danh_muc_1.moiTuyenCuaNhom; } });
-Object.defineProperty(exports, "TEN_VIEC", { enumerable: true, get: function () { return danh_muc_1.TEN_VIEC; } });
-Object.defineProperty(exports, "VIEC_TU_TEN", { enumerable: true, get: function () { return danh_muc_1.VIEC_TU_TEN; } });
+var catalog_1 = require("./core/catalog");
+Object.defineProperty(exports, "loadCatalog", { enumerable: true, get: function () { return catalog_1.loadCatalog; } });
+Object.defineProperty(exports, "normalizeGroup", { enumerable: true, get: function () { return catalog_1.normalizeGroup; } });
+Object.defineProperty(exports, "findGroup", { enumerable: true, get: function () { return catalog_1.findGroup; } });
+Object.defineProperty(exports, "availableActions", { enumerable: true, get: function () { return catalog_1.availableActions; } });
+Object.defineProperty(exports, "routeForAction", { enumerable: true, get: function () { return catalog_1.routeForAction; } });
+Object.defineProperty(exports, "allRoutes", { enumerable: true, get: function () { return catalog_1.allRoutes; } });
+Object.defineProperty(exports, "routesOfGroup", { enumerable: true, get: function () { return catalog_1.routesOfGroup; } });
+Object.defineProperty(exports, "ACTION_NAMES", { enumerable: true, get: function () { return catalog_1.ACTION_NAMES; } });
+Object.defineProperty(exports, "ACTION_FROM_NAME", { enumerable: true, get: function () { return catalog_1.ACTION_FROM_NAME; } });
 // Mảng nghiệp vụ.
-var mang_1 = require("./loi/mang");
-Object.defineProperty(exports, "moiMang", { enumerable: true, get: function () { return mang_1.moiMang; } });
-Object.defineProperty(exports, "mangCuaNhom", { enumerable: true, get: function () { return mang_1.mangCuaNhom; } });
-Object.defineProperty(exports, "timMang", { enumerable: true, get: function () { return mang_1.timMang; } });
+var domains_1 = require("./core/domains");
+Object.defineProperty(exports, "allDomains", { enumerable: true, get: function () { return domains_1.allDomains; } });
+Object.defineProperty(exports, "domainOfGroup", { enumerable: true, get: function () { return domains_1.domainOfGroup; } });
+Object.defineProperty(exports, "findDomain", { enumerable: true, get: function () { return domains_1.findDomain; } });
 // Phiên + khoá.
-var phien_1 = require("./loi/phien");
-Object.defineProperty(exports, "phienTuMoiTruong", { enumerable: true, get: function () { return phien_1.phienTuMoiTruong; } });
-Object.defineProperty(exports, "diaChiGoiCua", { enumerable: true, get: function () { return phien_1.diaChiGoiCua; } });
-Object.defineProperty(exports, "dauKhoa", { enumerable: true, get: function () { return phien_1.dauKhoa; } });
-Object.defineProperty(exports, "khoaBatBuoc", { enumerable: true, get: function () { return phien_1.khoaBatBuoc; } });
+var session_1 = require("./core/session");
+Object.defineProperty(exports, "sessionFromEnv", { enumerable: true, get: function () { return session_1.sessionFromEnv; } });
+Object.defineProperty(exports, "callBaseUrlOf", { enumerable: true, get: function () { return session_1.callBaseUrlOf; } });
+Object.defineProperty(exports, "keyPrefixOf", { enumerable: true, get: function () { return session_1.keyPrefixOf; } });
+Object.defineProperty(exports, "requireApiKey", { enumerable: true, get: function () { return session_1.requireApiKey; } });
 // Bản triển khai.
-var ban_1 = require("./loi/ban");
-Object.defineProperty(exports, "nhanDienBan", { enumerable: true, get: function () { return ban_1.nhanDienBan; } });
-Object.defineProperty(exports, "banHienTai", { enumerable: true, get: function () { return ban_1.banHienTai; } });
+var deployment_1 = require("./core/deployment");
+Object.defineProperty(exports, "identifyDeployment", { enumerable: true, get: function () { return deployment_1.identifyDeployment; } });
+Object.defineProperty(exports, "currentDeployment", { enumerable: true, get: function () { return deployment_1.currentDeployment; } });
 // Gọi HTTP + dịch lỗi.
-var http_1 = require("./loi/http");
-Object.defineProperty(exports, "goiApi", { enumerable: true, get: function () { return http_1.goiApi; } });
-Object.defineProperty(exports, "dichLoi", { enumerable: true, get: function () { return http_1.dichLoi; } });
+var http_1 = require("./core/http");
+Object.defineProperty(exports, "callApi", { enumerable: true, get: function () { return http_1.callApi; } });
+Object.defineProperty(exports, "translateError", { enumerable: true, get: function () { return http_1.translateError; } });
 // Đóng gói kết quả (gắn tên bản, ẩn khoá).
-var ket_qua_1 = require("./loi/ket-qua");
-Object.defineProperty(exports, "ketQua", { enumerable: true, get: function () { return ket_qua_1.ketQua; } });
-Object.defineProperty(exports, "ketQuaLoi", { enumerable: true, get: function () { return ket_qua_1.ketQuaLoi; } });
-Object.defineProperty(exports, "xoaKhoa", { enumerable: true, get: function () { return ket_qua_1.xoaKhoa; } });
-Object.defineProperty(exports, "dongBan", { enumerable: true, get: function () { return ket_qua_1.dongBan; } });
+var result_1 = require("./core/result");
+Object.defineProperty(exports, "formatResult", { enumerable: true, get: function () { return result_1.formatResult; } });
+Object.defineProperty(exports, "formatError", { enumerable: true, get: function () { return result_1.formatError; } });
+Object.defineProperty(exports, "redactKey", { enumerable: true, get: function () { return result_1.redactKey; } });
+Object.defineProperty(exports, "deploymentLine", { enumerable: true, get: function () { return result_1.deploymentLine; } });
 // Lỗi phân loại.
-var loi_1 = require("./loi/loi");
-Object.defineProperty(exports, "LoiNguoiDung", { enumerable: true, get: function () { return loi_1.LoiNguoiDung; } });
-Object.defineProperty(exports, "LoiCauHinh", { enumerable: true, get: function () { return loi_1.LoiCauHinh; } });
+var errors_1 = require("./core/errors");
+Object.defineProperty(exports, "UserError", { enumerable: true, get: function () { return errors_1.UserError; } });
+Object.defineProperty(exports, "ConfigError", { enumerable: true, get: function () { return errors_1.ConfigError; } });
 // Scanner: sinh danh mục từ mã nguồn máy chủ.
-var quet_nguon_1 = require("./quet/quet-nguon");
-Object.defineProperty(exports, "quetKho", { enumerable: true, get: function () { return quet_nguon_1.quetKho; } });
-Object.defineProperty(exports, "quetTep", { enumerable: true, get: function () { return quet_nguon_1.quetTep; } });
-Object.defineProperty(exports, "timTepController", { enumerable: true, get: function () { return quet_nguon_1.timTepController; } });
-Object.defineProperty(exports, "xepCrud", { enumerable: true, get: function () { return quet_nguon_1.xepCrud; } });
-Object.defineProperty(exports, "docBanKeModule", { enumerable: true, get: function () { return quet_nguon_1.docBanKeModule; } });
+var scan_source_1 = require("./scanner/scan-source");
+Object.defineProperty(exports, "scanRepo", { enumerable: true, get: function () { return scan_source_1.scanRepo; } });
+Object.defineProperty(exports, "scanFile", { enumerable: true, get: function () { return scan_source_1.scanFile; } });
+Object.defineProperty(exports, "findControllerFiles", { enumerable: true, get: function () { return scan_source_1.findControllerFiles; } });
+Object.defineProperty(exports, "classifyCrud", { enumerable: true, get: function () { return scan_source_1.classifyCrud; } });
+Object.defineProperty(exports, "readModuleManifests", { enumerable: true, get: function () { return scan_source_1.readModuleManifests; } });
 //# sourceMappingURL=index.js.map
